@@ -1,3 +1,4 @@
+
 public class Bidon {
 
 	/**
@@ -5,8 +6,6 @@ public class Bidon {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-      System.out.println("Salut Salut");
-      System.out.println("Et là?");
 
 	}
 
