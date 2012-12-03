@@ -2,7 +2,10 @@ package log121.tp3.controleur;
 
 import java.util.Observer;
 
+import log121.tp3.CommandeTranslation;
+import log121.tp3.CommandeZoom;
 import log121.tp3.Image;
+import log121.tp3.Origine;
 
 /**
  * Cette classe s'occupe de faire le lien entre la vue et le modèle.
@@ -21,8 +24,8 @@ public class Controleur {
 	 * Cette méthode ajouter un memento.
 	 */
 	private void addMemento() {
-		// Origine.setImage(mv.getImage());
-		// gc.addMemento(Origine.createMemento());
+		//Origine.setState(mv.getImage());
+		//gc.addMemento(Origine.createMementoImage());
 	}
 
 	public static Controleur getInstance() {
@@ -36,7 +39,9 @@ public class Controleur {
 	 * Cette méthode fait une translation.
 	 */
 	public void faireTranslation() {
-		// gc.getInsatance().faireTranslation();
+		//Méthode appelé quand on clique sur le bouton
+		//gc.getInstance().ajouterCommande(new CommandeTranslation(parametre));
+		//gc.getInstance().faire();
 		addMemento();
 	}
 
@@ -47,7 +52,9 @@ public class Controleur {
 	 *            détermine si le c'est un zoom in ou un zoom out.
 	 */
 	public void faireZoom(boolean zoomIn) {
-		// gc.getInsatance().faireZoom();
+		//Méthode appelé quand on clique sur le bouton
+		//gc.getInstance().ajouterCommande(new CommandeZoom(parametre));
+		//gc.getInstance().faire();
 		addMemento();
 
 		// test
@@ -58,8 +65,9 @@ public class Controleur {
 	 * Cette méthode fait une annulation.
 	 */
 	public void annuler() {
-		// mv.setImage(gc.getInsatance().annuler());
-
+		//Méthode appelé quand on clique sur le bouton
+		// mv.setImage(gc.getInstance().annuler());
+		//gc.getInstance().annuler();
 	}
 
 	/**
