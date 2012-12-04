@@ -60,7 +60,7 @@ public class GestionnaireCommande {
 	 * Cette méthode annule la dernière commande
 	 */
 	public void annuler() {
-		//Si on clique 1 fois, on annuler la dernière commande, 2 cliques de suites et on annule l'avant dernier, 3 cliques et 3ème de la fin annulé...
+		//Si on clique 1 fois , on annuler la dernière commande, 2 cliques de suites et on annule l'avant dernier, 3 cliques et 3ème de la fin annulé...
 		commandes.get(commandes.size()-1-nbAnnuler).annuler(getMementoImage());
 		nbAnnuler++;
 	}
