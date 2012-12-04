@@ -11,16 +11,11 @@ public class CommandeTranslation implements Commande {
 	}
 
 	/**
-	 * Appelle la méthode du receveur qui permet d'annuler la translation
+	 * Appelle la méthode du receveur qui permet d'annuler le zoom
+	 * @param mi mi correspond à un élément de MementoImage, il suffit donc de donner cet état pour annuler l'action
 	 */
-	public void annuler() {
-		/* Méthode à utiliser si possible :
-		 * Essayer d'appeler la même méthode que pour executer mais avec des paramètres différents
-		 * Exemple : Translation de 15px à droite -> receveur.faireTranslation(15);
-		 * Annuler cette translation -> receveur.faireTranslation(-15);
-		 */
+	public void annuler(MementoImage mi) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
