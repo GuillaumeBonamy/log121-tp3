@@ -11,16 +11,11 @@ public class CommandeZoom implements Commande {
 	}
 
 	/**
-	 * Appelle la méthode du receveur qui permet d'annuler la translation
+	 * Appelle la méthode du receveur qui permet d'annuler le zoom
+	 * @param mi mi correspond à un élément de MementoImage, il suffit donc de donner cet état pour annuler l'action
 	 */
 	public void annuler(MementoImage mi) {
-		/* Méthode à utiliser si possible :
-		 * Essayer d'appeler la même méthode que pour executer mais avec des paramètres différents
-		 * Exemple : Zoom de 10% -> receveur.faireZoom(10);
-		 * Annuler ce zoom -> receveur.faireZoom(-10); /!\ c'est un exemple, pense que comme c'est des pourcentages, pour revenir à l'état précédent, il faut faire plus que 10
-		 */
 		// TODO Auto-generated method stub
-		
 	}
 
 }
