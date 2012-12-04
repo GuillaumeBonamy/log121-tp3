@@ -13,7 +13,7 @@ public class CommandeZoom implements Commande {
 	/**
 	 * Appelle la méthode du receveur qui permet d'annuler la translation
 	 */
-	public void annuler() {
+	public void annuler(MementoImage mi) {
 		/* Méthode à utiliser si possible :
 		 * Essayer d'appeler la même méthode que pour executer mais avec des paramètres différents
 		 * Exemple : Zoom de 10% -> receveur.faireZoom(10);

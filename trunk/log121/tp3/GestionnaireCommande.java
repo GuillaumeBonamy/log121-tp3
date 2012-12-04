@@ -30,7 +30,7 @@ public class GestionnaireCommande {
 	 * Retourne le dernier MementoImage contenu dans l'ArrayList
 	 */
 	public MementoImage getMementoImage() {
-		return states.get(states.size()-1);
+		return states.get(states.size()-1-nbAnnuler);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class GestionnaireCommande {
 	 */
 	public void annuler() {
 		//Si on clique 1 fois, on annuler la dernière commande, 2 cliques de suites et on annule l'avant dernier, 3 cliques et 3ème de la fin annulé...
-		commandes.get(commandes.size()-1-nbAnnuler).annuler();
+		commandes.get(commandes.size()-1-nbAnnuler).annuler(getMementoImage());
 		nbAnnuler++;
 	}
 }
