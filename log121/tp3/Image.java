@@ -1,6 +1,6 @@
 package log121.tp3;
 
-public class Image {
+public class Image implements Cloneable {
 
 	private int x1, x2, y1, y2;
 	private int largeurOriginale, hauteurOriginale;
@@ -111,5 +111,20 @@ public class Image {
 	 */
 	public void setHauteurOriginale(int hauteurOriginale) {
 		this.hauteurOriginale = hauteurOriginale;
+	}
+	
+	/**
+	 * Cette fonction retourne un clone d'une image.
+	 * @return
+	 */
+	public Image getclone() {
+		Image i = null;
+		
+		try {
+			i = (Image) this.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
 }

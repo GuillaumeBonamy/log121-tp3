@@ -29,15 +29,18 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 	private ImageIcon iconeImage;
 	private Image img;
 
-	private ImageIcon dessinerIconeImage(Image iModifiee) {
-		int w = img.getX2() - img.getX1();
-		int h = img.getY2() - img.getY1();
+	/**
+	 * Cette fonction dessine la zone de l'image avec un carré rouge.
+	 * @param iModifiee l'image de la modèle de la vue.
+	 * @return l'icon de l'image.
+	 */
+	private ImageIcon dessinerZoneImage(Image iModifiee) {
 		int type = BufferedImage.TYPE_INT_RGB;
-		BufferedImage dst = new BufferedImage(img.getX2(), img.getY2(), type);
-		Graphics2D g2 = dst.createGraphics();
-		dst = dst.getSubimage(img.getX1(), img.getY1(), w, h);
-		g2.drawImage(iconeImage.getImage(), 0, 0, img.getX2(), img.getY2(),
-				this);
+		BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
+				img.getHauteurOriginale(), type);
+		Graphics2D g2 = bi.createGraphics();
+		g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
+				img.getHauteurOriginale(), this);
 
 		g2.setColor(Color.RED);
 		g2.drawRect(iModifiee.getX1(), iModifiee.getY1(), iModifiee.getX2()
@@ -45,7 +48,7 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 				- 1);
 
 		g2.dispose();
-		return new ImageIcon(dst);
+		return new ImageIcon(bi);
 	}
 
 	/**
@@ -65,7 +68,7 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 
 		this.panelImage = new JPanel();
 		this.iconeImage = new ImageIcon(img.getCheminImage());
-		this.labelImage = new JLabel(dessinerIconeImage(this.img));
+		this.labelImage = new JLabel(dessinerZoneImage(this.img));
 
 		this.panelImage.add(labelImage);
 		this.add(panelImage);
@@ -122,6 +125,7 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 	}
 
 	public void update(Observable arg0, Object arg1) {
-		labelImage.setIcon(dessinerIconeImage(Controleur.getInstance().getImageModeleVue()));
+		labelImage.setIcon(dessinerZoneImage(Controleur.getInstance()
+				.getImageModeleVue()));
 	}
 }
