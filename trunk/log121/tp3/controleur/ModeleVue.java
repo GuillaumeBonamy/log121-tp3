@@ -30,14 +30,6 @@ public class ModeleVue extends Observable {
 	 * @return
 	 */
 	Image getImage() {
-		Image iClone = new Image(i.getCheminImage());
-		iClone.setX1(i.getX1());
-		iClone.setX2(i.getX2());
-		iClone.setY1(i.getY1());
-		iClone.setY2(i.getY2());
-		iClone.setHauteurOriginale(i.getHauteurOriginale());
-		iClone.setLargeurOriginal(i.getLargeurOriginal());
-		
-		return  iClone;
+		return i.getclone();
 	}
 }

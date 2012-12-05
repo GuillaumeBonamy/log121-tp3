@@ -1,6 +1,5 @@
 package log121.tp3.controleur;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,25 +21,35 @@ public class VueImageModifie extends JFrame implements ActionListener, Observer 
 
 	private JMenuBar menuBar;
 	private JMenu menuAction;
-	private JMenuItem translate;
-	private JMenuItem zoom;
+	private JMenuItem translationHaut;
+	private JMenuItem translationBas;
+	private JMenuItem translationDroite;
+	private JMenuItem translationGauche;
+	private JMenuItem zoomIn;
+	private JMenuItem zoomOut;
 	private JPanel panelImage;
 	private JLabel labelImage;
 	private ImageIcon iconeImage;
 	private Image img;
 
+	/**
+	 * Cette fonction dessine une image et retourne un icone correspondant à
+	 * l'image.
+	 * 
+	 * @return l'icon de l'image.
+	 */
 	private ImageIcon dessinerIconeImage() {
-		int w = img.getX2() - img.getX1();
-		int h = img.getY2() - img.getY1();
 		int type = BufferedImage.TYPE_INT_RGB;
-		BufferedImage dst = new BufferedImage(img.getLargeurOriginal(), img.getHauteurOriginale(), type);
-		Graphics2D g2 = dst.createGraphics();
-		
-		dst = dst.getSubimage(img.getX1(), img.getY1(), w, h);
-						
-		g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(), img.getHauteurOriginale(), this);		
-		
-		return new ImageIcon(dst);
+
+		BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
+				img.getHauteurOriginale(), type);
+		Graphics2D g2 = bi.createGraphics();
+
+		g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
+				img.getHauteurOriginale(), img.getX1(), img.getY1(),
+				img.getX2(), img.getY2(), this);
+
+		return new ImageIcon(bi);
 	}
 
 	/**
@@ -74,14 +83,30 @@ public class VueImageModifie extends JFrame implements ActionListener, Observer 
 		menuBar = new JMenuBar();
 
 		menuAction = new JMenu("Action");
-		translate = new JMenuItem("Translater");
-		zoom = new JMenuItem("Zoomer");
+		translationBas = new JMenuItem("Translation en bas");
+		translationDroite = new JMenuItem("Translation à droite");
+		translationGauche = new JMenuItem("Translation à gauche");
+		translationHaut = new JMenuItem("Translation en haut");
+		zoomIn = new JMenuItem("Zoom In");
+		zoomOut = new JMenuItem("Zoom Out");
 
-		menuAction.add(translate);
-		translate.addActionListener(this);
+		menuAction.add(translationBas);
+		translationBas.addActionListener(this);
 
-		menuAction.add(zoom);
-		zoom.addActionListener(this);
+		menuAction.add(translationDroite);
+		translationDroite.addActionListener(this);
+
+		menuAction.add(translationGauche);
+		translationGauche.addActionListener(this);
+
+		menuAction.add(translationHaut);
+		translationHaut.addActionListener(this);
+
+		menuAction.add(zoomIn);
+		zoomIn.addActionListener(this);
+
+		menuAction.add(zoomOut);
+		zoomOut.addActionListener(this);
 
 		menuBar.add(menuAction);
 
@@ -92,26 +117,54 @@ public class VueImageModifie extends JFrame implements ActionListener, Observer 
 	 * Methode permettant de gerer les actions sur les items
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == translate) {
+		/*
+		 * Ce code est temporaire. Il faut passer par GestionCommande.
+		 */
+		
+		if (e.getSource() == translationBas) {
 			// test
-			Image iClone = new Image(img.getCheminImage());
-			iClone.setX1(img.getX1() + 100);
-			iClone.setX2(img.getX2());
-			iClone.setY1(img.getY1());
-			iClone.setY2(img.getY2());
-			iClone.setHauteurOriginale(img.getHauteurOriginale());
-			iClone.setLargeurOriginal(img.getLargeurOriginal());
+			Image iClone = img.getclone();
+			iClone.setY1(img.getY1() + 50);
+			iClone.setY2(img.getY2() + 50);
 			Controleur.getInstance().tempSetImage(iClone);
 			// test
-		} else if (e.getSource() == zoom) {
+		} else if (e.getSource() == translationDroite) {
 			// test
-			Image iClone = new Image(img.getCheminImage());
+			Image iClone = img.getclone();
 			iClone.setX1(img.getX1() + 50);
+			iClone.setX2(img.getX2() + 50);
+			Controleur.getInstance().tempSetImage(iClone);
+			// test
+		} else if (e.getSource() == translationGauche) {
+			// test
+			Image iClone = img.getclone();
+			iClone.setX1(img.getX1() - 50);
 			iClone.setX2(img.getX2() - 50);
-			iClone.setY1(img.getY1() + 50);
+			Controleur.getInstance().tempSetImage(iClone);
+			// test
+		} else if (e.getSource() == translationHaut) {
+			// test
+			Image iClone = img.getclone();
+			iClone.setY1(img.getY1() - 50);
 			iClone.setY2(img.getY2() - 50);
-			iClone.setHauteurOriginale(img.getHauteurOriginale());
-			iClone.setLargeurOriginal(img.getLargeurOriginal());
+			Controleur.getInstance().tempSetImage(iClone);
+			// test
+		} else if (e.getSource() == zoomIn) {
+			// test
+			Image iClone = img.getclone();
+			iClone.setX1(img.getX1() + 25);
+			iClone.setX2(img.getX2() - 25);
+			iClone.setY1(img.getY1() + 25);
+			iClone.setY2(img.getY2() - 25);
+			Controleur.getInstance().tempSetImage(iClone);
+			// test
+		} else if (e.getSource() == zoomOut) {
+			// test
+			Image iClone = img.getclone();
+			iClone.setX1(img.getX1() - 25);
+			iClone.setX2(img.getX2() + 25);
+			iClone.setY1(img.getY1() - 25);
+			iClone.setY2(img.getY2() + 25);
 			Controleur.getInstance().tempSetImage(iClone);
 			// test
 		}
