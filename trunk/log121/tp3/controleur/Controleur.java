@@ -2,8 +2,6 @@ package log121.tp3.controleur;
 
 import java.util.Observer;
 
-import log121.tp3.CommandeTranslation;
-import log121.tp3.CommandeZoom;
 import log121.tp3.Image;
 import log121.tp3.Origine;
 
