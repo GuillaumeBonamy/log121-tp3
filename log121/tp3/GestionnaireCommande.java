@@ -61,7 +61,7 @@ public class GestionnaireCommande {
 	 */
 	public void annuler() {
 		//Si on clique 1 fois , on annuler la dernière commande, 2 cliques de suites et on annule l'avant dernier, 3 cliques et 3ème de la fin annulé...
-		commandes.get(commandes.size()-1-nbAnnuler).annuler(getMementoImage());
+		commandes.get(commandes.size()-1-nbAnnuler).annuler();
 		nbAnnuler++;
 	}
 }
