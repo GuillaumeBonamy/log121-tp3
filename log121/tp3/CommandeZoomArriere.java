@@ -1,13 +1,15 @@
+package log121.tp3;
+
 /**
- * Classe du patron Commande permettant de faire ou défaire un zoom
- * arrière sur une image
+ * Classe du patron Commande permettant de faire ou dÃ©faire un zoom
+ * arriÃ¨re sur une image
  * @author Samuel Picard
  *
  */
 public class CommandeZoomArriere extends Receveur implements Commande {
 	
 	/**
-	 * Méthode qui appelle la méthode d'exécution du zoom arrière
+	 * MÃ©thode qui appelle la mÃ©thode d'exÃ©cution du zoom arriÃ¨re
 	 * du receveur
 	 */
 	public void executer() {
@@ -15,8 +17,8 @@ public class CommandeZoomArriere extends Receveur implements Commande {
 	}
 	
 	/**
-	 * Méthode qui annule le zoom arrière à partir de l'état
-	 * de l'image capturée avec le patron Memento
+	 * MÃ©thode qui annule le zoom arriÃ¨re Ã  partir de l'Ã©tat
+	 * de l'image capturÃ©e avec le patron Memento
 	 */
 	public void annuler() {
 		
