@@ -1,3 +1,5 @@
+package log121.tp3;
+
 /** 
  * Classe du patron Commande permettant d'effectuer ou d'annuler une translation 
  * horizontale sur une image
@@ -7,7 +9,7 @@
 public class CommandeTranslationVerticale extends Receveur implements Commande {
 	
 	/**
-	 * Méthode qui appelle la méthode du receveur exécutant la
+	 * MÃ©thode qui appelle la mÃ©thode du receveur exÃ©cutant la
 	 * translation verticale
 	 */
 	public void executer() {
@@ -15,8 +17,8 @@ public class CommandeTranslationVerticale extends Receveur implements Commande {
 	}
 	
 	/**
-	 * Méthode qui annule la translation verticale à partir de l'état
-	 * de l'image capturée avec le patron Memento
+	 * MÃ©thode qui annule la translation verticale Ã  partir de l'Ã©tat
+	 * de l'image capturÃ©e avec le patron Memento
 	 */
 	public void annuler()
 	{
