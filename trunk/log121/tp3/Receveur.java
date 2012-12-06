@@ -1,5 +1,7 @@
+package log121.tp3;
+
 /**
- * Classe du patron Commande représentant le receveur 
+ * Classe du patron Commande reprÃ©sentant le receveur 
  * pour les commandes de traitement sur les images
  * @author Samuel Picard
  *
@@ -7,7 +9,7 @@
 public class Receveur {
 	
 	/**
-	 * Méthode qui exécute une translation horizontale sur
+	 * MÃ©thode qui exÃ©cute une translation horizontale sur
 	 * une image
 	 */
 	public void executerTranslationHorizontale() {
@@ -15,7 +17,7 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute une translation verticale sur
+	 * MÃ©thode qui exÃ©cute une translation verticale sur
 	 * une image
 	 */
 	public void executerTranslationVerticale() {
@@ -23,14 +25,14 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute un zoom arrière sur une image
+	 * MÃ©thode qui exÃ©cute un zoom arriÃ¨re sur une image
 	 */
 	public void executerZoomArriere() {
 		
 	}
 	
 	/**
-	 * Méthode qui exécute un zoom avant sur une image
+	 * MÃ©thode qui exÃ©cute un zoom avant sur une image
 	 */
 	public void executerZoomAvant() {
 		
