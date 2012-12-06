@@ -1,3 +1,5 @@
+package log121.tp3;
+
 /**
  * 
  * @author Samuel Picard
@@ -6,12 +8,12 @@
 public interface Commande {
 	
 	/**
-	 * Méthode qui définit la modification à effectuer sur l'image
+	 * MÃ©thode qui dÃ©finit la modification Ã  effectuer sur l'image
 	 */
 	public void executer();
 	
 	/**
-	 * Méthode qui définit annule la modification effectuée sur l'image
+	 * MÃ©thode qui dÃ©finit annule la modification effectuÃ©e sur l'image
 	 */
 	public void annuler();
 }
