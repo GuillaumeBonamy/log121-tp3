@@ -37,6 +37,11 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	private JLabel labelImage;
 	private ImageIcon iconeImage;
 	private Image img;
+	private int clickX;
+	private int clickY;
+	
+	private final int DEPLACEMENT = 50;
+	private final int FACTEUR_ZOOM = 25;
 
 	/**
 	 * Cette fonction dessine une image et retourne un icone correspondant à
@@ -126,99 +131,53 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	 * Methode permettant de gerer les actions sur les items
 	 */
 	public void actionPerformed(ActionEvent e) {
-		/*
-		 * Ce code est temporaire. Il faut passer par GestionCommande.
-		 */
-
+		
 		if (e.getSource() == translationBas) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setY1(img.getY1() + 50);
-			iClone.setY2(img.getY2() + 50);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
+					img.getY1() + DEPLACEMENT, img.getY2()+ DEPLACEMENT);
+			
 		} else if (e.getSource() == translationDroite) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() + 50);
-			iClone.setX2(img.getX2() + 50);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() + DEPLACEMENT, img.getX2() + DEPLACEMENT, 
+					img.getY1(), img.getY2());
+			
 		} else if (e.getSource() == translationGauche) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() - 50);
-			iClone.setX2(img.getX2() - 50);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() - DEPLACEMENT, img.getX2() - DEPLACEMENT, 
+					img.getY1(), img.getY2());
+			
 		} else if (e.getSource() == translationHaut) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setY1(img.getY1() - 50);
-			iClone.setY2(img.getY2() - 50);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
+					img.getY1() - DEPLACEMENT, img.getY2() - DEPLACEMENT);
+			
 		} else if (e.getSource() == zoomIn) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() + 25);
-			iClone.setX2(img.getX2() - 25);
-			iClone.setY1(img.getY1() + 25);
-			iClone.setY2(img.getY2() - 25);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
+					img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
+			
 		} else if (e.getSource() == zoomOut) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() - 25);
-			iClone.setX2(img.getX2() + 25);
-			iClone.setY1(img.getY1() - 25);
-			iClone.setY2(img.getY2() + 25);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
+					img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
 		}
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (e.getWheelRotation() < 0) {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() + 25);
-			iClone.setX2(img.getX2() - 25);
-			iClone.setY1(img.getY1() + 25);
-			iClone.setY2(img.getY2() - 25);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
+					img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
+			
 		} else {
-			// test
-			Image iClone = img.getclone();
-			iClone.setX1(img.getX1() - 25);
-			iClone.setX2(img.getX2() + 25);
-			iClone.setY1(img.getY1() - 25);
-			iClone.setY2(img.getY2() + 25);
-			Controleur.getInstance().tempSetImage(iClone);
-			// test
+			Controleur.getInstance().faireTranslation(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
+					img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
+			
 		}
 	}
 	
-	// TEST
-	int clickX;
-	int clickY;
-	
-
 	@Override
 	public void mouseDragged(MouseEvent e) {		
-		// test
-		Image iClone = img.getclone();
-		iClone.setX1(img.getX1() - (e.getX() - clickX));
-		iClone.setX2(img.getX2() - (e.getX() - clickX));
-		iClone.setY1(img.getY1() - (e.getY() - clickY));
-		iClone.setY2(img.getY2() - (e.getY() - clickY));
-		Controleur.getInstance().tempSetImage(iClone);
+		Controleur.getInstance().faireTranslation(img.getX1() - (e.getX() - clickX), img.getX2() - (e.getX() - clickX), 
+				img.getY1() - (e.getY() - clickY), img.getY2() - (e.getY() - clickY));
+		
 		clickX = e.getX();
 		clickY = e.getY();
-		// test
 	}
 
 	@Override

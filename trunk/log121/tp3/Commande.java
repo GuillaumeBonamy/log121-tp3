@@ -8,12 +8,12 @@ package log121.tp3;
 public interface Commande {
 	
 	/**
-	 * MÃ©thode qui dÃ©finit la modification Ã  effectuer sur l'image
+	 * Méthode qui définit la modification à effectuer sur l'image
 	 */
-	public void executer();
+	public void executer(int x1, int y1, int x2, int y2);
 	
 	/**
-	 * MÃ©thode qui dÃ©finit annule la modification effectuÃ©e sur l'image
+	 * Méthode qui définit annule la modification effectuée sur l'image
 	 */
-	public void annuler();
+	public void annuler(MementoImage m);
 }

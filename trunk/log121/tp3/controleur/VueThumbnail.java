@@ -116,7 +116,8 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 			JFileChooser fc = new JFileChooser();
 			fc.showOpenDialog(this);
 
-			Image image = new Image(fc.getSelectedFile().getAbsolutePath());
+			Image image = new Image(fc.getSelectedFile().getAbsolutePath(), iconeImage.getIconWidth(), 
+					iconeImage.getIconHeight());
 
 			new VueThumbnail();
 			new VueImageModifie();

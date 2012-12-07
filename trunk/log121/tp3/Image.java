@@ -12,8 +12,12 @@ public class Image implements Cloneable {
 	 * @param cheminImage
 	 *            L'emplacement de l'image
 	 */
-	public Image(String cheminImage) {
+	public Image(String cheminImage, int largeurOriginale, int hauteurOriginale) {
 		this.cheminImage = cheminImage;
+		this.largeurOriginale = largeurOriginale;
+		this.hauteurOriginale = hauteurOriginale;
+		this.x2 = largeurOriginale;
+		this.y2 = hauteurOriginale;
 	}
 
 	/**
@@ -91,26 +95,6 @@ public class Image implements Cloneable {
 	 */
 	public void setY2(int y2) {
 		this.y2 = y2;
-	}
-	
-	/**
-	 * Modifie la coordonnee y1 de l'image
-	 * 
-	 * @param y1
-	 *            La nouvelle coordonnee
-	 */
-	public void setLargeurOriginal(int largeurOriginale) {
-		this.largeurOriginale = largeurOriginale;
-	}
-
-	/**
-	 * Modifie la coordonnee y2 de l'image
-	 * 
-	 * @param y2
-	 *            La nouvelle coordonnee
-	 */
-	public void setHauteurOriginale(int hauteurOriginale) {
-		this.hauteurOriginale = hauteurOriginale;
 	}
 	
 	/**
