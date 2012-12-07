@@ -30,8 +30,8 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 	private Image img;
 
 	/**
-	 * Cette fonction dessine la zone de l'image avec un carré rouge.
-	 * @param iModifiee l'image de la modèle de la vue.
+	 * Cette fonction dessine la zone de l'image avec un carrÃ© rouge.
+	 * @param iModifiee l'image de la modÃ¨le de la vue.
 	 * @return l'icon de l'image.
 	 */
 	private ImageIcon dessinerZoneImage(Image iModifiee) {
@@ -125,7 +125,7 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 		}
 	}
 
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable obs, Object obj) {
 		labelImage.setIcon(dessinerZoneImage(Controleur.getInstance()
 				.getImageModeleVue()));
 	}
