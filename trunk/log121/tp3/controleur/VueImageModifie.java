@@ -44,7 +44,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	private final int FACTEUR_ZOOM = 25;
 
 	/**
-	 * Cette fonction dessine une image et retourne un icone correspondant à
+	 * Cette fonction dessine une image et retourne un icone correspondant Ã 
 	 * l'image.
 	 * 
 	 * @return l'icon de l'image.
@@ -93,13 +93,13 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	/**
 	 * Methode permettant de creer le menu de la fenetre
 	 */
-	public void creerMenu() {
+	private void creerMenu() {
 		menuBar = new JMenuBar();
 
 		menuAction = new JMenu("Action");
 		translationBas = new JMenuItem("Translation en bas");
-		translationDroite = new JMenuItem("Translation à droite");
-		translationGauche = new JMenuItem("Translation à gauche");
+		translationDroite = new JMenuItem("Translation Ã  droite");
+		translationGauche = new JMenuItem("Translation Ã  gauche");
 		translationHaut = new JMenuItem("Translation en haut");
 		zoomIn = new JMenuItem("Zoom In");
 		zoomOut = new JMenuItem("Zoom Out");
