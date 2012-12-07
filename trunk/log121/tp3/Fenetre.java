@@ -82,6 +82,8 @@ public class Fenetre extends JFrame implements ActionListener {
 	public void ouvrir() {
 		JFileChooser fc = new JFileChooser();
 		fc.showOpenDialog(this);
+		if(fc.getSelectedFile()==null)
+			return;
 		ImageIcon iconeImage = new ImageIcon(fc.getSelectedFile().getAbsolutePath());
 		Controleur c = Controleur.getInstance();
 		

@@ -161,11 +161,11 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (e.getWheelRotation() < 0) {
-			Controleur.getInstance().faireTranslation(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
+			Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
 					img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
 			
 		} else {
-			Controleur.getInstance().faireTranslation(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
+			Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
 					img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
 			
 		}

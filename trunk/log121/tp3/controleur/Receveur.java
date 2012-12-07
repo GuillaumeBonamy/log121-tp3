@@ -44,6 +44,13 @@ public class Receveur {
 		largeurMax = i.getLargeurOriginal();
 		hauteurMax = i.getHauteurOriginale();
 		
+		// Test
+		i.setX1(x1);
+		i.setX2(x2);
+		i.setY1(y1);
+		i.setY2(y2);
+		// Test
+		
 		mv.setImage(i);
 	}
 	
