@@ -149,11 +149,11 @@ public class VueImageModifie extends JFrame implements ActionListener,
 					img.getY1() - DEPLACEMENT, img.getY2() - DEPLACEMENT);
 			
 		} else if (e.getSource() == zoomIn) {
-			Controleur.getInstance().faireTranslation(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
+			Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
 					img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
 			
 		} else if (e.getSource() == zoomOut) {
-			Controleur.getInstance().faireTranslation(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
+			Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
 					img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
 		}
 	}

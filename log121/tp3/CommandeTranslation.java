@@ -11,25 +11,21 @@ import log121.tp3.controleur.Receveur;
 public class CommandeTranslation implements Commande {
 	
 	private Receveur receveur;
+	private int x1, x2, y1, y2;
 	
-	public CommandeTranslation() {
+	public CommandeTranslation(int x1, int x2, int y1, int y2) {
 		this.receveur = new Receveur();
+		this.x1 = x1;
+		this.x2 = x2;
+		this.y1 = y1;
+		this.y2 = y2;
 	}
 	
 	/**
 	 * Méthode qui appelle la méthode du receveur exécutant la
 	 * translation horizontale
 	 */
-	public void executer(int x1, int y1, int x2, int y2) {
-		receveur.executerTranslation(x1, y1, x2, y2);
-	}
-	
-	
-	/**
-	 * Méthode qui annule la translation horizontale à partir de l'état
-	 * de l'image capturée avec le patron Memento
-	 */
-	public void annuler(MementoImage m) {
-		
+	public void executer() {
+		receveur.executerTranslation(x1, x2, y1, y2);
 	}
 }

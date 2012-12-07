@@ -1,6 +1,7 @@
 package log121.tp3.controleur;
 
 import log121.tp3.Image;
+import log121.tp3.MementoImage;
 
 /**
  * Classe du patron Commande représentant le receveur 
@@ -23,10 +24,10 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute une translation verticale sur
-	 * une image
+	 * Méthode qui exécute une translation sur une image
 	 */
-	public void executerTranslation(int x1, int y1, int x2, int y2) {
+	public void executerTranslation(int x1, int x2, int y1, int y2) {
+		i = mv.getImage();
 		largeurMax = i.getLargeurOriginal();
 		hauteurMax = i.getHauteurOriginale();
 		
@@ -36,13 +37,21 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute un zoom arrière sur une image
+	 * Méthode qui exécute un zoom sur une image
 	 */
-	public void executerZoom(int x1, int y1, int x2, int y2) {
+	public void executerZoom(int x1, int x2, int y1, int y2) {
+		i = mv.getImage();
 		largeurMax = i.getLargeurOriginal();
 		hauteurMax = i.getHauteurOriginale();
 		
 		mv.setImage(i);
+	}
+	
+	/**
+	 * Méthode qui annuler la commande précédente
+	 */
+	public void executerAnnuler(MementoImage mi) {
+		//A FAIRE
 	}
 	
 	public void translaterX(int x1, int x2) {
