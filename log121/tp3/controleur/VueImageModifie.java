@@ -218,7 +218,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
 	
 	// TEST
 
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable obs, Object obj) {
 		img = Controleur.getInstance().getImageModeleVue();
 		labelImage.setIcon(dessinerIconeImage());
 	}
