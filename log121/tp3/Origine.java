@@ -1,9 +1,9 @@
 package log121.tp3;
 
 
-public class Origine {
+public abstract class Origine {
 
-		private Image state;
+		private static Image state;
 	
 		/**
 		 * Constructeur de la classe Origine
@@ -14,7 +14,7 @@ public class Origine {
 		 * Methode permettant de creer un nouveau MementoImage
 		 * @return le MementoImage creer
 		 */
-		public MementoImage createMementoImage()
+		public static MementoImage createMementoImage()
 		{
 			return new MementoImage(state);
 		}
@@ -22,9 +22,9 @@ public class Origine {
 		/**
 		 * @param state La nouvelle image
 		 */
-		public void setState(Image state)
+		public static void setState(Image newState)
 		{
-			this.state=state;
+			state=newState;
 		}
 		
 }
