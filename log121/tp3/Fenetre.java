@@ -24,28 +24,28 @@ public class Fenetre extends JFrame implements ActionListener {
 	private JMenuItem ouvrir, quitter;
 
 	/**
-	* Constructeur de la classe fenêtre
-	*/
+	 * Constructeur de la classe fenêtre
+	 */
 	public Fenetre() {
 		setTitle("TP3");
 		setLocation(0, 0);
 		setSize(400, 400);
 
 		creerMenu();
-		
+
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
 				System.exit(0);
-			}	
+			}
 		});
 
 		setVisible(true);
 
 	}
 
-		/**
-		 * Methode permettant de creer le menu de la fenetre principale
-		 */
+	/**
+	 * Methode permettant de creer le menu de la fenetre principale
+	 */
 	public void creerMenu() {
 		menuBar = new JMenuBar();
 
@@ -65,8 +65,8 @@ public class Fenetre extends JFrame implements ActionListener {
 	}
 
 	/**
-	* Methode permettant de gerer les differentes actions des items
-	  */
+	 * Methode permettant de gerer les differentes actions des items
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == ouvrir) {
@@ -77,26 +77,17 @@ public class Fenetre extends JFrame implements ActionListener {
 	}
 
 	/**
-	* Methode permettant d'ouvrir une image
-	*/
+	 * Methode permettant d'ouvrir une image
+	 */
 	public void ouvrir() {
 		JFileChooser fc = new JFileChooser();
 		fc.showOpenDialog(this);
-		if(fc.getSelectedFile()==null)
-			return;
-		Image image = new Image(fc.getSelectedFile().getAbsolutePath());
-		ImageIcon iconeImage = new ImageIcon(image.getCheminImage());
+		ImageIcon iconeImage = new ImageIcon(fc.getSelectedFile().getAbsolutePath());
 		Controleur c = Controleur.getInstance();
-
-		// test
-		image.setX1(0);
-		image.setX2(iconeImage.getIconWidth());
-		image.setY1(0);
-		image.setY2(iconeImage.getIconHeight());
-		image.setHauteurOriginale(iconeImage.getIconHeight());
-		image.setLargeurOriginal(iconeImage.getIconWidth());
-
-		c.tempSetImage(image);
+		
+        c.creerImageInitiale(fc.getSelectedFile().getAbsolutePath(), iconeImage.getIconWidth(), 
+				iconeImage.getIconHeight());
+		
 		// test
 
 		VueThumbnail vt = new VueThumbnail();
@@ -111,5 +102,6 @@ public class Fenetre extends JFrame implements ActionListener {
 		vt.setVisible(true);
 		vim.setVisible(true);
 		vs.setVisible(true);
+
 	}
 }

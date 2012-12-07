@@ -2,8 +2,8 @@ package log121.tp3.controleur;
 
 import java.util.Observer;
 
+import log121.tp3.GestionnaireCommande;
 import log121.tp3.Image;
-import log121.tp3.Origine;
 
 /**
  * Cette classe s'occupe de faire le lien entre la vue et le modèle.
@@ -36,7 +36,7 @@ public class Controleur {
 	/**
 	 * Cette méthode fait une translation.
 	 */
-	public void faireTranslation() {
+	public void faireTranslation(int x1, int x2, int y1, int y2) {
 		//Méthode appelé quand on clique sur le bouton
 		//gc.getInstance().ajouterCommande(new CommandeTranslation(parametre));
 		//gc.getInstance().faire();
@@ -84,13 +84,13 @@ public class Controleur {
 	public Image getImageModeleVue() {
 		return mv.getImage();
 	}
-
-	/**
-	 * MÉTHODE TEMPORAIRE! Il faut passer par GestionCommande.
-	 * 
-	 * @param i
-	 */
-	public void tempSetImage(Image i) {
-		mv.setImage(i);
+	
+	public ModeleVue getModeleVue() {
+		return this.mv;
 	}
+	
+	public void creerImageInitiale(String path, int largeurOriginale, int hauteurOriginale) {
+		GestionnaireCommande.getInstance().creerImageInitiale(path, largeurOriginale, hauteurOriginale);
+	}
+	
 }
