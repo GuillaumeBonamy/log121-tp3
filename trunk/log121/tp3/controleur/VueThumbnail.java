@@ -94,7 +94,7 @@ public class VueThumbnail extends JFrame implements ActionListener, Observer {
 	/**
 	 * Methode permettant de creer le menu de la fenetre
 	 */
-	public void creerMenu() {
+	private void creerMenu() {
 		menuBar = new JMenuBar();
 
 		menuAction = new JMenu("Action");
