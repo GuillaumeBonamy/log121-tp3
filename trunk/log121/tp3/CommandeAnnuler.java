@@ -8,23 +8,20 @@ import log121.tp3.controleur.Receveur;
  * @author Samuel Picard
  *
  */
-public class CommandeZoom extends Receveur implements Commande {
+public class CommandeAnnuler extends Receveur implements Commande {
 	
 	/**
 	 * Receveur de la commande de zoom avant
 	 */
 	private Receveur receveur;
-	private int x1, x2, y1, y2;
+	private MementoImage mi;
 	
 	/**
 	 * Constructeur de la commande de zoom avant
 	 */
-	public CommandeZoom(int x1, int x2, int y1, int y2)  {
+	public CommandeAnnuler(MementoImage mi)  {
 		this.receveur = new Receveur();
-		this.x1 = x1;
-		this.x2 = x2;
-		this.y1 = y1;
-		this.y2 = y2;
+		this.mi = mi;
 	}
 	
 	/**
@@ -32,6 +29,6 @@ public class CommandeZoom extends Receveur implements Commande {
 	 * avant du receveur
 	 */
 	public void executer() {
-		receveur.executerZoom(x1, x2, y1, y2);
+		receveur.executerAnnuler(mi);
 	}
 }

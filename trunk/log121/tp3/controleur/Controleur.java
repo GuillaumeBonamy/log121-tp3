@@ -2,8 +2,12 @@ package log121.tp3.controleur;
 
 import java.util.Observer;
 
+import log121.tp3.CommandeAnnuler;
+import log121.tp3.CommandeTranslation;
+import log121.tp3.CommandeZoom;
 import log121.tp3.GestionnaireCommande;
 import log121.tp3.Image;
+import log121.tp3.MementoImage;
 
 /**
  * Cette classe s'occupe de faire le lien entre la vue et le modèle.
@@ -23,7 +27,7 @@ public class Controleur {
 	 */
 	private void addMemento() {
 		//Origine.setState(mv.getImage());
-		//gc.addMemento(Origine.createMementoImage());
+		//GestionnaireCommande.addMemento(Origine.createMementoImage());
 	}
 
 	public static Controleur getInstance() {
@@ -38,8 +42,8 @@ public class Controleur {
 	 */
 	public void faireTranslation(int x1, int x2, int y1, int y2) {
 		//Méthode appelé quand on clique sur le bouton
-		//gc.getInstance().ajouterCommande(new CommandeTranslation(parametre));
-		//gc.getInstance().faire();
+		GestionnaireCommande.getInstance().setCommande(new CommandeTranslation(x1,x2,y1,y2));
+		GestionnaireCommande.getInstance().faireCommande();
 		addMemento();
 	}
 
@@ -49,10 +53,10 @@ public class Controleur {
 	 * @param zoomIn
 	 *            détermine si le c'est un zoom in ou un zoom out.
 	 */
-	public void faireZoom(boolean zoomIn) {
+	public void faireZoom(int x1, int x2, int y1, int y2) {
 		//Méthode appelé quand on clique sur le bouton
-		//gc.getInstance().ajouterCommande(new CommandeZoom(parametre));
-		//gc.getInstance().faire();
+		GestionnaireCommande.getInstance().setCommande(new CommandeZoom(x1,x2,y1,y2));
+		GestionnaireCommande.getInstance().faireCommande();
 		addMemento();
 
 		// test
@@ -63,9 +67,14 @@ public class Controleur {
 	 * Cette méthode fait une annulation.
 	 */
 	public void annuler() {
+		//On récupère la dernière image
+		MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
+		//On crée la commande avec la dernière image et on l'ajoute au gestionnaire
+		GestionnaireCommande.getInstance().setCommande(new CommandeAnnuler(mi));
+		GestionnaireCommande.getInstance().faireCommande();
 		//Méthode appelé quand on clique sur le bouton
-		// mv.setImage(gc.getInstance().annuler());
-		//gc.getInstance().annuler();
+		//mv.setImage(GestionnaireCommande.getInstance().annuler());
+		//GestionnaireCommande.getInstance().annuler();
 	}
 
 	/**
