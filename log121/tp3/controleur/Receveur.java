@@ -151,7 +151,11 @@ public class Receveur {
 			// On ne fait rien si les coordonnées sont inversées
 		}
 		else if (!(verifierBornesX1(x1))) {
-			i.setX2(i.getX1() + i.getX2());
+			if (!verifierBornesX2(i.getX1() + i.getX2())) {
+				i.setX2(i.getLargeurOriginal());
+			} else {
+				i.setX2(i.getX1() + i.getX2());
+			}			
 			i.setX1(0);
 		}
 		else if (!(verifierBornesX2(x2))) {
@@ -176,7 +180,11 @@ public class Receveur {
 			// On ne fait rien si les coordonnées sont inversées
 		}
 		else if (!(verifierBornesY1(y1))) {
-			i.setY2(i.getY2() + i.getY1());
+			if (!verifierBornesY2(i.getY2() + i.getY1())) {
+				i.setY2(i.getHauteurOriginale());
+			} else {
+				i.setY2(i.getY2() + i.getY1());
+			}			
 			i.setY1(0);
 		}
 		else if (!(verifierBornesY2(y2))) {
