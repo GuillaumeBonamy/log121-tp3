@@ -13,7 +13,7 @@ public class MementoImage {
 	 */
 	public MementoImage(Image state)
 	{
-		this.state=state;
+		this.state = state;
 	}
 	
 	/**

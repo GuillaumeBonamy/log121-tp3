@@ -8,12 +8,13 @@ import log121.tp3.controleur.Receveur;
  * @author Samuel Picard
  *
  */
-public class CommandeAnnuler extends Receveur implements Commande {
+public class CommandeAnnuler implements Commande {
 	
 	/**
 	 * Receveur de la commande de zoom avant
 	 */
 	private Receveur receveur;
+	
 	private MementoImage mi;
 	
 	/**
