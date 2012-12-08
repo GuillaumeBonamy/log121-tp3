@@ -95,7 +95,7 @@ public class Receveur {
 	 * @param x1 Valeur X pour le premier point de l'image
 	 * @param x2 Valeur X pour le deuxième point de l'image
 	 */
-	public void translaterX(int x1, int x2) {
+	private void translaterX(int x1, int x2) {
 		
 		int largeurActuelle = i.getX2() - i.getX1();
 		
@@ -120,7 +120,7 @@ public class Receveur {
 	 * @param y1 Valeur Y du premier point de l'image
 	 * @param y2 Valeur Y du deuxième point de l'image
 	 */
-	public void translaterY(int y1, int y2) {
+	private void translaterY(int y1, int y2) {
 		
 		int hauteurActuelle = i.getY2() - i.getY1();
 		
@@ -145,7 +145,7 @@ public class Receveur {
 	 * @param x1 Coordonnée X du premier point de l'image
 	 * @param x2 Coordonnée X du deuxième point de l'image
 	 */
-	public void zoomX(int x1, int x2) {
+	private void zoomX(int x1, int x2) {
 		
 		if (x1 >= x2) {
 			// On ne fait rien si les coordonnées sont inversées
@@ -174,7 +174,7 @@ public class Receveur {
 	 * @param y1 Coordonnée Y du premier point de l'image
 	 * @param y2 Coordonnée Y du deuxième point de l'image
 	 */
-	public void zoomY(int y1, int y2) {
+	private void zoomY(int y1, int y2) {
 		
 		if (y1 >= y2) {
 			// On ne fait rien si les coordonnées sont inversées
@@ -203,7 +203,7 @@ public class Receveur {
 	 * @param x1 Valeur X du premier point de l'image
 	 * @return Si les bornes sont valide ou non
 	 */
-	public boolean verifierBornesX1(int x1) {
+	private boolean verifierBornesX1(int x1) {
 		if (x1 > 0) {
 			return true;
 		}
@@ -218,7 +218,7 @@ public class Receveur {
 	 * @param x2 Valeur X du deuxième point de l'image
 	 * @return Si les bornes sont valides ou non
 	 */
-	public boolean verifierBornesX2(int x2) {
+	private boolean verifierBornesX2(int x2) {
 		if (x2 < largeurMax) {
 			return true;
 		}
@@ -233,7 +233,7 @@ public class Receveur {
 	 * @param y1 La valeur Y du premier point de l'image
 	 * @return Si les bornes sont valides ou non
 	 */
-	public boolean verifierBornesY1(int y1) {
+	private boolean verifierBornesY1(int y1) {
 		if (y1 > 0) {
 			return true;
 		} 
@@ -248,7 +248,7 @@ public class Receveur {
 	 * @param y2 
 	 * @return Si les bornes sont valides ou non
 	 */
-	public boolean verifierBornesY2(int y2) {
+	private boolean verifierBornesY2(int y2) {
 		if (y2 < hauteurMax) {
 			return true;
 		}
