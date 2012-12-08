@@ -129,13 +129,19 @@ public class Receveur {
 		}
 	}
 	
+	/**
+	 * Méthode qui effectue un zoom sur les coordonées X des 
+	 * 2 points de l'image
+	 * @param x1 Coordonnée X du premier point de l'image
+	 * @param x2 Coordonnée X du deuxième point de l'image
+	 */
 	public void zoomX(int x1, int x2) {
 		
 		if (x1 >= x2) {
 		}
 		else if (!(verifierBornesX1(x1))) {
-			i.setX1(0);
 			i.setX2(i.getX1() + i.getX2());
+			i.setX1(0);
 		}
 		else if (!(verifierBornesX2(x2))) {
 			i.setX1(i.getX1() - (i.getLargeurOriginal() - i.getX2()));
@@ -153,8 +159,8 @@ public class Receveur {
 			// On ne fait rien si les coordonnées sont inversées
 		}
 		else if (!(verifierBornesY1(y1))) {
-			i.setY1(0);
 			i.setY2(i.getY2() + i.getY1());
+			i.setY1(0);
 		}
 		else if (!(verifierBornesY2(y2))) {
 			i.setY1(i.getY1() - (i.getHauteurOriginale() - i.getY2()));
