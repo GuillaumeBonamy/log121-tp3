@@ -21,112 +21,93 @@ import log121.tp3.Image;
 
 public class VueThumbnail extends JFrame implements ActionListener, Observer {
 
-	private JMenuBar menuBar;
-	private JMenu menuAction;
-	private JMenuItem changerImage;
-	private JPanel panelImage;
-	private JLabel labelImage;
-	private ImageIcon iconeImage;
-	private Image img;
+        private JMenuBar menuBar;
+        private JMenu menuAction;
+        private JMenuItem quitter;
+        private JPanel panelImage;
+        private JLabel labelImage;
+        private ImageIcon iconeImage;
+        private Image img;
 
-	/**
-	 * Cette fonction dessine la zone de l'image avec un carré rouge.
-	 * @param iModifiee l'image de la modèle de la vue.
-	 * @return l'icon de l'image.
-	 */
-	private ImageIcon dessinerZoneImage(Image iModifiee) {
-		int type = BufferedImage.TYPE_INT_RGB;
-		BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
-				img.getHauteurOriginale(), type);
-		Graphics2D g2 = bi.createGraphics();
-		g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
-				img.getHauteurOriginale(), this);
+        /**
+         * Cette fonction dessine la zone de l'image avec un carré rouge.
+         * @param iModifiee l'image de la modèle de la vue.
+         * @return l'icon de l'image.
+         */
+        private ImageIcon dessinerZoneImage(Image iModifiee) {
+                int type = BufferedImage.TYPE_INT_RGB;
+                BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
+                                img.getHauteurOriginale(), type);
+                Graphics2D g2 = bi.createGraphics();
+                g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
+                                img.getHauteurOriginale(), this);
 
-		g2.setColor(Color.RED);
-		g2.drawRect(iModifiee.getX1(), iModifiee.getY1(), iModifiee.getX2()
-				- iModifiee.getX1() - 1, iModifiee.getY2() - iModifiee.getY1()
-				- 1);
+                g2.setColor(Color.RED);
+                g2.drawRect(iModifiee.getX1(), iModifiee.getY1(), iModifiee.getX2()
+                                - iModifiee.getX1() - 1, iModifiee.getY2() - iModifiee.getY1()
+                                - 1);
 
-		g2.dispose();
-		return new ImageIcon(bi);
-	}
+                g2.dispose();
+                return new ImageIcon(bi);
+        }
 
-	/**
-	 * Constructeur de la classe VueThumbnail
-	 * 
-	 * @param img
-	 *            L'image a afficher dans la fenetre
-	 */
-	public VueThumbnail() {
-		setTitle("Vue vignette");
-		setLocation(50, 450);
-		setSize(400, 400);
+        /**
+         * Constructeur de la classe VueThumbnail
+         * 
+         * @param img
+         *            L'image a afficher dans la fenetre
+         */
+        public VueThumbnail() {
+                setTitle("Vue vignette");
+                setLocation(50, 450);
+                setSize(400, 400);
 
-		creerMenu();
+                creerMenu();
 
-		this.img = Controleur.getInstance().getImageModeleVue();
+                this.img = Controleur.getInstance().getImageModeleVue();
 
-		this.panelImage = new JPanel();
-		this.iconeImage = new ImageIcon(img.getCheminImage());
-		this.labelImage = new JLabel(dessinerZoneImage(this.img));
+                this.panelImage = new JPanel();
+                this.iconeImage = new ImageIcon(img.getCheminImage());
+                this.labelImage = new JLabel(dessinerZoneImage(this.img));
 
-		this.panelImage.add(labelImage);
-		this.add(panelImage);
+                this.panelImage.add(labelImage);
+                this.add(panelImage);
 
-		// modifierImage();
 
-		setVisible(true);
-	}
+                setVisible(true);
+        }
 
-	// /**
-	// * Methode permettant de modifier les coordonnees de l'image
-	// */
-	// public void modifierImage()
-	// {
-	// img.setX1(0);
-	// img.setX2(icon.getIconWidth());
-	// System.out.println("hauteur:" + icon.getIconWidth());
-	// img.setY1(0);
-	// img.setY2(icon.getIconHeight());
-	// System.out.println("largeur:" + icon.getIconHeight());
-	// }
+ 
 
-	/**
-	 * Methode permettant de creer le menu de la fenetre
-	 */
-	private void creerMenu() {
-		menuBar = new JMenuBar();
+        /**
+         * Methode permettant de creer le menu de la fenetre
+         */
+        private void creerMenu() {
+                menuBar = new JMenuBar();
 
-		menuAction = new JMenu("Action");
-		changerImage = new JMenuItem("Changer Image");
+                menuAction = new JMenu("Action");
+                quitter = new JMenuItem("Quitter");
 
-		menuAction.add(changerImage);
-		changerImage.addActionListener(this);
+                menuAction.add(quitter);
+                quitter.addActionListener(this);
 
-		menuBar.add(menuAction);
+                menuBar.add(menuAction);
 
-		this.setJMenuBar(menuBar);
-	}
+                this.setJMenuBar(menuBar);
+        }
 
-	/**
-	 * Methode permettant de gerer les actions des items
-	 */
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == changerImage) {
-			JFileChooser fc = new JFileChooser();
-			fc.showOpenDialog(this);
+        /**
+         * Methode permettant de gerer les actions des items
+         */
+        public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == quitter) {
+                       System.exit(0);
+                }
+        }
 
-			Image image = new Image(fc.getSelectedFile().getAbsolutePath(), iconeImage.getIconWidth(), 
-					iconeImage.getIconHeight());
+        public void update(Observable arg0, Object arg1) {
+                labelImage.setIcon(dessinerZoneImage(Controleur.getInstance()
+                                .getImageModeleVue()));
+        }
 
-			new VueThumbnail();
-			new VueImageModifie();
-			new VueStatistiques();
-		}
-	}
-
-	public void update(Observable obs, Object obj) {
-		labelImage.setIcon(dessinerZoneImage(Controleur.getInstance()
-				.getImageModeleVue()));
-	}
 }
