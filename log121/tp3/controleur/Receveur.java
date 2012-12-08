@@ -91,6 +91,20 @@ public class Receveur {
         }
         
         /**
+         * Méthode qui exécute la translation sur les valeurs X. Elle reçoit en
+         * paramètre le Memento d'une image
+         *
+         * @param x1
+         *            Valeur X du premier point de l'image
+         * @param x2
+         *            Valeur X du deuxième point de l'image
+         */
+        public void executerInitialiser(MementoImage mi) {
+        	i = mi.getState().getclone();
+        	creerImage();
+        }
+        
+        /**
          * Méthode qui effectue la translation sur les X.
          * Elle reçoit en paramètre les coordonées X souhaitées
          * de l'image
@@ -287,5 +301,14 @@ public class Receveur {
         public void creerImageInitiale(String path, int largeurOriginale, int hauteurOriginale) {
                 i = new Image(path, largeurOriginale, hauteurOriginale);
                 mv.setImage(i);
+        }
+        
+        /**
+         * Cette méthode crée une image
+         */
+        public void creerImage()
+        {
+        	Origine.setState(i.getclone());
+        	mv.setImage(i);
         }
 }
