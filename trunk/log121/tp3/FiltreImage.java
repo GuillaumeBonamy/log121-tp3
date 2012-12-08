@@ -1,3 +1,5 @@
+package log121.tp3;
+
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
