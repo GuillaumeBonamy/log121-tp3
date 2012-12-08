@@ -14,6 +14,10 @@ public class CommandeZoom extends Receveur implements Commande {
 	 * Receveur de la commande de zoom avant
 	 */
 	private Receveur receveur;
+	
+	/**
+	 * Les 4 coordonnées souhaitées de l'image
+	 */
 	private int x1, x2, y1, y2;
 	
 	/**

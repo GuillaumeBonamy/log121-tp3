@@ -39,7 +39,9 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute une translation verticale sur une image
+	 * Méthode qui exécute une translation verticale sur une image.
+	 * Elle reçoit en paramètre les 4 nouvelles coordonées souhaitées
+	 * de l'image. 
 	 * @param x1 Valeur X du premier point de l'image
 	 * @param y1 Valeur Y du premier point de l'image
 	 * @param x2 Valeur X du deuxième point de l'image
@@ -57,7 +59,9 @@ public class Receveur {
 	
 	
 	/**
-	 * Méthode qui exécute un zoom sur une image
+	 * Méthode qui exécute un zoom sur une image.
+	 * Elle reçoit en paramètre les 4 coordonnées souhaitées
+	 * de l'image.
 	 * @param x1 Valeur X pour le premier point de l'image
 	 * @param y1 Valeur Y pour le premier point de l'image
 	 * @param x2 Valeur X pour le deuxième point de l'image
@@ -75,7 +79,8 @@ public class Receveur {
 	
 
 	/**
-	 * Méthode qui exécute la translation sur les valeurs X
+	 * Méthode qui exécute la translation sur les valeurs X.
+	 * Elle reçoit en paramètre le Memento d'une image
 	 * @param x1 Valeur X du premier point de l'image
 	 * @param x2 Valeur X du deuxième point de l'image
 	 */
@@ -84,7 +89,9 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui effectue la translation sur les X
+	 * Méthode qui effectue la translation sur les X.
+	 * Elle reçoit en paramètre les coordonées X souhaitées
+	 * de l'image
 	 * @param x1 Valeur X pour le premier point de l'image
 	 * @param x2 Valeur X pour le deuxième point de l'image
 	 */
@@ -107,7 +114,9 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui exécute une translation sur les valeurs Y
+	 * Méthode qui exécute une translation sur les valeurs Y.
+	 * Elle reçoit en paramètre les coordonnées Y souhaitées
+	 * de l'image.
 	 * @param y1 Valeur Y du premier point de l'image
 	 * @param y2 Valeur Y du deuxième point de l'image
 	 */
@@ -131,13 +140,15 @@ public class Receveur {
 	
 	/**
 	 * Méthode qui effectue un zoom sur les coordonées X des 
-	 * 2 points de l'image
+	 * 2 points de l'image. Elle recoit en paramètre les
+	 * coordonnées X souhaitées de l'image.
 	 * @param x1 Coordonnée X du premier point de l'image
 	 * @param x2 Coordonnée X du deuxième point de l'image
 	 */
 	public void zoomX(int x1, int x2) {
 		
 		if (x1 >= x2) {
+			// On ne fait rien si les coordonnées sont inversées
 		}
 		else if (!(verifierBornesX1(x1))) {
 			i.setX2(i.getX1() + i.getX2());
@@ -153,6 +164,12 @@ public class Receveur {
 		}
 	}
 	
+	/**
+	 * Méthode qui effectue un zoom sur les coordonnées Y des 2 points de l'image.
+	 * Elle reçoit en paramètre les coordonnées Y souhaitées de l'image.
+	 * @param y1 Coordonnée Y du premier point de l'image
+	 * @param y2 Coordonnée Y du deuxième point de l'image
+	 */
 	public void zoomY(int y1, int y2) {
 		
 		if (y1 >= y2) {
@@ -174,6 +191,7 @@ public class Receveur {
 	
 	/**
 	 * Méthode qui vérifit les bornes X pour le premier point de l'image
+	 * Elle reçoit en paramètre la borne x1 de l'image.
 	 * @param x1 Valeur X du premier point de l'image
 	 * @return Si les bornes sont valide ou non
 	 */
@@ -188,6 +206,7 @@ public class Receveur {
 	
 	/**
 	 * Méthode qui vérifit les bornes X pour le deuxième point de l'image
+	 * Elle reçoit en paramètre la borne x2 de l'image.
 	 * @param x2 Valeur X du deuxième point de l'image
 	 * @return Si les bornes sont valides ou non
 	 */
@@ -202,6 +221,7 @@ public class Receveur {
 	
 	/**
 	 * Méthode qui vérifit les bornes Y du premier point de l'image
+	 * Elle reçoit en paramètre la borne Y1 de l'image
 	 * @param y1 La valeur Y du premier point de l'image
 	 * @return Si les bornes sont valides ou non
 	 */
@@ -216,6 +236,7 @@ public class Receveur {
 	
 	/**
 	 * Méthode qui vérifit si les bornes Y du deuxième point de l'image sont valides 
+	 * Elle reçoit en paramètre la borne y2 de l'image
 	 * @param y2 
 	 * @return Si les bornes sont valides ou non
 	 */
@@ -229,7 +250,9 @@ public class Receveur {
 	}
 	
 	/**
-	 * Méthode qui créer l'image initiale sélectionnée par l'utilisateur 
+	 * Méthode qui créer l'image initiale sélectionnée par l'utilisateur
+	 * Elle reçoit en paramètre le chemin d'accès de l'image et les
+	 * 2 dimensions originales de l'image 
 	 * @param path Chemin d'accès de l'image
 	 * @param largeurOriginale Largeur de l'image initiale
 	 * @param hauteurOriginale Hauteur de l'image initiale
