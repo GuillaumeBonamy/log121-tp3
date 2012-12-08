@@ -21,30 +21,11 @@ public class VueStatistiques extends JFrame implements Observer {
         private JTextField tf;
         private JSlider slider;
         private Image img;
-        private int zoom=0;
-        private int zoomInit=0;
-        private int changement=-1;
+
         
         private void modifierStatistiques() {
                 tf.setText("x1:"+img.getX1()+ " x2: "+img.getX2()+"\ny1: "+img.getY1()+" y2: "+img.getY2());
-                
-                if(zoomInit == zoom)
-                	zoomInit++;
-                else if(changement == 1){
-                	zoom = zoom + 25;
-                	slider.setValue(zoom);
-                 
-                }
-                else if(changement == 0)
-                {
-                	
-                	
-                	if(zoom-25 >= 0)
-                	{
-                		zoom = zoom - 25;
-                		slider.setValue(zoom);
-                	}
-                }
+                slider.setValue(img.getZoom());
         }
         
 
@@ -77,7 +58,7 @@ public class VueStatistiques extends JFrame implements Observer {
         
         private JSlider ajouterSlider()
         {
-                slider = new JSlider(SwingConstants.HORIZONTAL,0,325,0); // Debute a 0, finit a 325, valeur initiale a 0.
+                slider = new JSlider(SwingConstants.HORIZONTAL,0,375,0); // Debute a 0, finit a 325, valeur initiale a 0.
                 slider.setMajorTickSpacing(25); // Afficher les tirets tous les 25 pixels
                 slider.setPaintTicks(true); // Afficher les tirets
                 
@@ -92,10 +73,6 @@ public class VueStatistiques extends JFrame implements Observer {
                 return slider;
         }
         
-        public void setChangementSlider(int changement)
-        {
-        	this.changement=changement;
-        }
         
         /**
          * 
