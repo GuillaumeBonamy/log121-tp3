@@ -3,22 +3,25 @@ package log121.tp3;
 import log121.tp3.controleur.Receveur;
 
 /**
- * Classe du patron Commande permettant d'exécuter ou d'annuler un zoom
- * avant sur une image
+ * Classe du patron Commande permettant d'annuler une opération
+ * sur une image
  * @author Samuel Picard
  *
  */
 public class CommandeAnnuler implements Commande {
 	
 	/**
-	 * Receveur de la commande de zoom avant
+	 * Instance du receveur du patron Commande
 	 */
 	private Receveur receveur;
 	
+	/**
+	 * Memento contenant l'état d'une image
+	 */
 	private MementoImage mi;
 	
 	/**
-	 * Constructeur de la commande de zoom avant
+	 * Constructeur de la commande d'annulation d'opération
 	 */
 	public CommandeAnnuler(MementoImage mi)  {
 		this.receveur = new Receveur();
@@ -26,8 +29,7 @@ public class CommandeAnnuler implements Commande {
 	}
 	
 	/**
-	 * Méthode qui appelle la méthode d'exécution du zoom
-	 * avant du receveur
+	 * Méthode qui appelle la méthode d'annulation du receveur
 	 */
 	public void executer() {
 		receveur.executerAnnuler(mi);
