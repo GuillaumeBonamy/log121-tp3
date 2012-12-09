@@ -50,6 +50,7 @@ public class GestionnaireCommande {
 	 * Retourne le dernier MementoImage contenu dans l'ArrayList
 	 */
 	public MementoImage getMementoImage() {
+		
 		// On sauvegarde le dernier �l�ment
 		MementoImage mi = states.get(states.size() - 1);
 
