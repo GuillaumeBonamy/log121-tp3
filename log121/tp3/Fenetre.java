@@ -31,7 +31,7 @@ public class Fenetre extends JFrame implements ActionListener {
 	 * Constructeur de la classe fenêtre
 	 */
 	public Fenetre() {
-		setTitle("TP3");
+		setTitle("Outil de traitement d'image");
 		setLocation(0, 0);
 		setSize(400, 400);
 
