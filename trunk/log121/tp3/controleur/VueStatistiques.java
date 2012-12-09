@@ -74,12 +74,8 @@ public class VueStatistiques extends JFrame implements Observer {
                 return slider;
         }
         
-        /**
-         * Methode servant à vérifier si l'image a été dézoomée ou zoomée
-         * @param imgTemp l'image précédente
-         * @param img l'image actuelle
-         */
-        public void verifierZoom(Image imgTemp, Image img)
+        
+        public void modifierZoom(Image imgTemp, Image img)
         {
         	//si l'image est plus haute que large
         	if(img.getLargeurOriginal() <= img.getHauteurOriginale()) {
@@ -113,7 +109,49 @@ public class VueStatistiques extends JFrame implements Observer {
         	img.setZoom(compteurZoomEffectue*FACTEUR_ZOOM);
         	//on modifie le nbZoom de l'image  actuel pour ne pas perdre la donnée
         	img.setNbZoom(imgTemp.getNbZoom());	
-        	
+        }
+        /**
+         * Methode servant à vérifier si l'image a été dézoomée ou zoomée ou aucun des deux
+         * @param imgTemp l'image précédente
+         * @param img l'image actuelle
+         */
+        public void verifierZoom(Image imgTemp, Image img)
+        {
+        	if(img.getX1() > imgTemp.getX1() && img.getX2() < imgTemp.getX2() && img.getY1() > imgTemp.getY1() && img.getY2() < imgTemp.getY2())
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else if(img.getX1() < imgTemp.getX1() && img.getX2() > imgTemp.getX2() && img.getY1() < imgTemp.getY1() && img.getY2() > imgTemp.getY2())
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else if(img.getX1() == imgTemp.getX1() && img.getX2() == imgTemp.getX2() && img.getY1() > imgTemp.getY1() && img.getY2() < imgTemp.getY2())
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else if(img.getX1() == imgTemp.getX1() && img.getX2() == imgTemp.getX2() && img.getY1() < imgTemp.getY1() && img.getY2() > imgTemp.getY2() )
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else if(img.getX1() < imgTemp.getX1() && img.getX2() > imgTemp.getX2() && img.getY1() == imgTemp.getY1() && img.getY2() == imgTemp.getY2())
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else if(img.getX1() > imgTemp.getX1() && img.getX2() < imgTemp.getX2() && img.getY1() == imgTemp.getY1() && img.getY2() == imgTemp.getY2() )
+        	{
+        		modifierZoom(imgTemp, img);
+        		
+        	}
+        	else
+        	{
+        		img.setZoom(compteurZoomEffectue*FACTEUR_ZOOM);
+        		img.setNbZoom(imgTemp.getNbZoom());	
+        	}
         	
         }
         
