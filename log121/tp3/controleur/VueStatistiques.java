@@ -13,7 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import log121.tp3.Image;
-
+/**
+ * Classe servant de vue pour les statistiques de l'image.
+ * 
+ *
+ */
 
 public class VueStatistiques extends JFrame implements Observer {
         
@@ -24,6 +28,9 @@ public class VueStatistiques extends JFrame implements Observer {
         private final int FACTEUR_ZOOM=25;
         private int compteurZoomEffectue=0;
         
+        /**
+         * Méthode modifiant les statistiques de la vue
+         */
         private void modifierStatistiques() {
                 tf.setText("x1:"+img.getX1()+ " x2: "+img.getX2()+"\ny1: "+img.getY1()+" y2: "+img.getY2());
                 slider.setValue(img.getZoom());
@@ -57,6 +64,10 @@ public class VueStatistiques extends JFrame implements Observer {
                 this.add(panel);
         }
         
+        /**
+         * Methode permettant d'ajouter la barre de zoom
+         * @return le slider créer.
+         */
         private JSlider ajouterSlider()
         {
                 slider = new JSlider(SwingConstants.HORIZONTAL,0,img.getNbZoom()*FACTEUR_ZOOM,0); // Debute a 0, finit a 325, valeur initiale a 0.
@@ -74,7 +85,11 @@ public class VueStatistiques extends JFrame implements Observer {
                 return slider;
         }
         
-        
+        /**
+         * Permet de déplacer le curseur du slider
+         * @param imgTemp l'image précédente
+         * @param img l'image actuelle
+         */
         public void modifierZoom(Image imgTemp, Image img)
         {
         	//si l'image est plus haute que large
@@ -156,7 +171,7 @@ public class VueStatistiques extends JFrame implements Observer {
         }
         
         /**
-         * 
+         * Méthode mettant à jour les statistiques de la vue.
          */
          public void update(Observable arg0, Object arg1) {
         	 	 this.imgTemp=img;
