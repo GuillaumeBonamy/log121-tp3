@@ -1,9 +1,10 @@
 package log121.tp3;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class MementoImage {
+public class MementoImage implements Serializable{
 	
 	private Image state;
 	

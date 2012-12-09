@@ -23,7 +23,7 @@ public class GestionnaireCommande {
 	}
 
 	/**
-	 * Cette méthode ajouter un memento.
+	 * Cette mï¿½thode ajouter un memento.
 	 */
 	public void addMemento(MementoImage mi) {
 		if (verifierImageModifiee(mi)) {
@@ -32,7 +32,7 @@ public class GestionnaireCommande {
 	}
 
 	/**
-	 * Cette méthode ajouter le premier memento.
+	 * Cette mï¿½thode ajouter le premier memento.
 	 */
 	public void addMementoInitial(MementoImage mi) {
 		states = new ArrayList<MementoImage>();
@@ -40,16 +40,20 @@ public class GestionnaireCommande {
 	}
 
 	/**
+	 * Supprime le dernier MementoImage contenu dans l'arraylist
+	 */
+	public void delMementoImage() {
+		states.remove(states.size() - 1);
+	}
+	
+	/**
 	 * Retourne le dernier MementoImage contenu dans l'ArrayList
 	 */
 	public MementoImage getMementoImage() {
-		// On le supprime de l'ArrayList
-		states.remove(states.size() - 1);
-
-		// On sauvegarde le dernier élément
+		// On sauvegarde le dernier ï¿½lï¿½ment
 		MementoImage mi = states.get(states.size() - 1);
 
-		// On renvoi l'élément
+		// On renvoi l'ï¿½lï¿½ment
 		return mi;
 	}
 
@@ -63,7 +67,7 @@ public class GestionnaireCommande {
 	}
 
 	/**
-	 * Ajoute une commande à l'arrayList pour pouvoir la traiter à la suite
+	 * Ajoute une commande ï¿½ l'arrayList pour pouvoir la traiter ï¿½ la suite
 	 * 
 	 * @param cmd
 	 *            commande de type CommandeTranslation ou CommandeZoom
@@ -73,7 +77,7 @@ public class GestionnaireCommande {
 	}
 
 	/**
-	 * Cette méthode execute la dernière commande
+	 * Cette mï¿½thode execute la derniï¿½re commande
 	 */
 	public void faireCommande() {
 		commande.executer();
@@ -85,7 +89,7 @@ public class GestionnaireCommande {
 	}
 
 	/**
-	 * Cette fonction vérifie si la commande annuler peut être annulée.
+	 * Cette fonction vï¿½rifie si la commande annuler peut ï¿½tre annulï¿½e.
 	 * 
 	 * @return si l'annulation est possible.
 	 */
@@ -98,6 +102,9 @@ public class GestionnaireCommande {
 		return verifierSiAnnulerPossible;
 	}
 
+	/**
+	 * On regarde si la derniÃ¨re image mÃ©morisÃ©e est identique Ã  celle actuelle. Si elles sont diffÃ©rentes, on renvoi true;
+	 */
 	private boolean verifierImageModifiee(MementoImage mi) {
 		Image image1 = states.get(states.size() - 1).getState();
 		Image image2 = mi.getState();

@@ -1,5 +1,7 @@
 package log121.tp3.controleur;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Observer;
 
 import log121.tp3.CommandeAnnuler;
@@ -12,7 +14,7 @@ import log121.tp3.MementoImage;
 import log121.tp3.Origine;
 
 /**
- * Cette classe s'occupe de faire le lien entre la vue et le modèle.
+ * Cette classe s'occupe de faire le lien entre la vue et le modï¿½le.
  * 
  * @author James Medvedovski
  * 
@@ -32,7 +34,7 @@ public class Controleur {
 	}
 
 	/**
-	 * Cette méthode ajouter un memento.
+	 * Cette mï¿½thode ajouter un memento.
 	 */
 	public void addMemento() {
 		GestionnaireCommande.getInstance().addMemento(
@@ -40,7 +42,7 @@ public class Controleur {
 	}
 
 	/**
-	 * Cette méthode ajouter le premier memento.
+	 * Cette mï¿½thode ajouter le premier memento.
 	 */
 	private void addMementoInitial() {
 		GestionnaireCommande.getInstance().addMementoInitial(
@@ -48,63 +50,95 @@ public class Controleur {
 	}
 
 	/**
-	 * Cette méthode fait une translation.
+	 * Cette mï¿½thode fait une translation.
 	 */
 	public void faireTranslation(int x1, int x2, int y1, int y2) {
-		// Méthode appelé quand on clique sur le bouton
+		// Mï¿½thode appelï¿½ quand on clique sur le bouton
 		GestionnaireCommande.getInstance().setCommande(
 				new CommandeTranslation(x1, x2, y1, y2));
 		GestionnaireCommande.getInstance().faireCommande();
 	}
 
 	/**
-	 * Cette méthode fait un zoom.
+	 * Cette mï¿½thode fait un zoom.
 	 * 
 	 * @param zoomIn
-	 *            détermine si le c'est un zoom in ou un zoom out.
+	 *            dï¿½termine si le c'est un zoom in ou un zoom out.
 	 */
 	public void faireZoom(int x1, int x2, int y1, int y2) {
-		// Méthode appelé quand on clique sur le bouton
+		// Mï¿½thode appelï¿½ quand on clique sur le bouton
 		GestionnaireCommande.getInstance().setCommande(
 				new CommandeZoom(x1, x2, y1, y2));
 		GestionnaireCommande.getInstance().faireCommande();
 	}
 
 	/**
-	 * Cette méthode fait une annulation.
+	 * Cette mï¿½thode fait une annulation.
 	 */
 	public void annuler() {
-		// On récupère la dernière image
+		// On rï¿½cupï¿½re la derniï¿½re image
 		MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
-		// On crée la commande avec la dernière image et on l'ajoute au
+		//On supprime l'image de l'arraylist en mÃªme temps
+		GestionnaireCommande.getInstance().delMementoImage();
+		// On crï¿½e la commande avec la derniï¿½re image et on l'ajoute au
 		// gestionnaire
 		GestionnaireCommande.getInstance().setCommande(new CommandeAnnuler(mi));
 		GestionnaireCommande.getInstance().faireCommande();
 	}
 
 	public void initialiser() {
-		// On récupère la première image
+		// On rï¿½cupï¿½re la premiï¿½re image
 		MementoImage mi = GestionnaireCommande.getInstance()
 				.getMementoImageInitiale();
-		// On crée la commande avec la première image et on l'ajoute au
+		// On crï¿½e la commande avec la premiï¿½re image et on l'ajoute au
 		// gestionnaire
 		GestionnaireCommande.getInstance().setCommande(
 				new CommandeInitialiser(mi));
 		GestionnaireCommande.getInstance().faireCommande();
 	}
+	
+	/**
+	 * Cette mÃ©thode permet de sauvegarder l'Ã©tat de l'objet dans un fichier
+	 */
+	public void sauvegarder(String chemin) {
+		try {
+			//On rÃ©cupÃ¨re le dernier MementoImage contenu dans l'arrayList du Gestionnaire
+			MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
+			//On enregistre Ã  l'endroit souhaitÃ© et on ajoute l'extension .dat au fichier
+			FileOutputStream fichier = new FileOutputStream(chemin+".dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fichier);
+			//On enregistre l'objet
+			oos.writeObject(mi);
+			oos.flush();
+			oos.close();
+	    }
+	    catch (java.io.IOException e) {
+	    	e.printStackTrace();
+	    }
+	}
+	
+	/**
+	 * Cette mÃ©thode restaurer l'image lorsque l'on ouvre un fichier sauvegardÃ©
+	 * @param mi
+	 */
+	public void restaurer(MementoImage mi) {
+		Image img = mi.getState();
+		//On modifie l'image pour qu'elle corresponde Ã  ce qu'elle Ã©tait quand on a enregistrÃ©
+		faireTranslation(img.getX1(), img.getX2(), img.getY1(), img.getY2());
+	}
 
 	/**
-	 * Cette méthode ajouter des observeurs à la modèle de la vue.
+	 * Cette mï¿½thode ajouter des observeurs ï¿½ la modï¿½le de la vue.
 	 * 
 	 * @param o
-	 *            un observeur de la modèle de la vue.
+	 *            un observeur de la modï¿½le de la vue.
 	 */
 	public void addObserverModelVue(Observer o) {
 		mv.addObserver(o);
 	}
 
 	/**
-	 * Cette méthode recherche l'image de la modèle de la vue.
+	 * Cette mï¿½thode recherche l'image de la modï¿½le de la vue.
 	 */
 	public Image getImageModeleVue() {
 		return mv.getImage();
