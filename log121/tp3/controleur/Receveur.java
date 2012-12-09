@@ -6,7 +6,7 @@ import log121.tp3.MementoImage;
 import log121.tp3.Origine;
 
 /**
- * Classe du patron Commande reprÈsentant le receveur pour les commandes de
+ * Classe du patron Commande repr√©sentant le receveur pour les commandes de
  * traitement sur les images
  * 
  * @author Samuel Picard
@@ -14,302 +14,317 @@ import log121.tp3.Origine;
  */
 public class Receveur {
 
-	/**
-	 * Instance de la classe ModeleVue
-	 */
-	private ModeleVue mv;
+        /**
+         * Instance de la classe ModeleVue
+         */
+        private ModeleVue mv;
 
-	/**
-	 * Image ouverte par l'utilisateur
-	 */
-	private Image i;
+        /**
+         * Image ouverte par l'utilisateur
+         */
+        private Image i;
 
-	/**
-	 * Largeur maximale possible de l'image
-	 */
-	private int largeurMax;
+        /**
+         * Largeur maximale possible de l'image
+         */
+        private int largeurMax;
 
-	/**
-	 * Hauteur maximale de l'image
-	 */
-	private int hauteurMax;
+        /**
+         * Hauteur maximale de l'image
+         */
+        private int hauteurMax;
 
-	/**
-	 * Constructeur du receveur du patron Commande
-	 */
-	public Receveur() {
-		this.mv = Controleur.getInstance().getModeleVue();
-	}
+        /**
+         * Constructeur du receveur du patron Commande
+         */
+        public Receveur() {
+                this.mv = Controleur.getInstance().getModeleVue();
+        }
 
-	/**
-	 * MÈthode qui exÈcute une translation verticale sur une image. Elle reÁoit
-	 * en paramËtre les 4 nouvelles coordonÈes souhaitÈes de l'image.
-	 * 
-	 * @param x1
-	 *            Valeur X du premier point de l'image
-	 * @param y1
-	 *            Valeur Y du premier point de l'image
-	 * @param x2
-	 *            Valeur X du deuxiËme point de l'image
-	 * @param y2
-	 *            Valeur Y du deuxiËme point de l'image
-	 */
-	public void executerTranslation(int x1, int x2, int y1, int y2) {
-		i = mv.getImage();
-		largeurMax = i.getLargeurOriginal();
-		hauteurMax = i.getHauteurOriginale();
+        /**
+         * M√©thode qui ex√©cute une translation verticale sur une image. Elle re√ßoit
+         * en param√®tre les 4 nouvelles coordon√©es souhait√©es de l'image.
+         * 
+         * @param x1
+         *            Valeur X du premier point de l'image
+         * @param y1
+         *            Valeur Y du premier point de l'image
+         * @param x2
+         *            Valeur X du deuxi√®me point de l'image
+         * @param y2
+         *            Valeur Y du deuxi√®me point de l'image
+         */
+        public void executerTranslation(int x1, int x2, int y1, int y2) {
+                i = mv.getImage();
+                largeurMax = i.getLargeurOriginal();
+                hauteurMax = i.getHauteurOriginale();
 
-		translaterX(x1, x2);
-		translaterY(y1, y2);
-		creerImage();	
-	}
+                translaterX(x1, x2);
+                translaterY(y1, y2);
+                creerImage();   
+        }
 
-	/**
-	 * MÈthode qui exÈcute un zoom sur une image. Elle reÁoit en paramËtre les 4
-	 * coordonnÈes souhaitÈes de l'image.
-	 * 
-	 * @param x1
-	 *            Valeur X pour le premier point de l'image
-	 * @param y1
-	 *            Valeur Y pour le premier point de l'image
-	 * @param x2
-	 *            Valeur X pour le deuxiËme point de l'image
-	 * @param y2
-	 *            Valeur Y pour le deuxiËme point de l'image
-	 */
-	public void executerZoom(int x1, int x2, int y1, int y2) {
-		i = mv.getImage();
-		largeurMax = i.getLargeurOriginal();
-		hauteurMax = i.getHauteurOriginale();
+        /**
+         * M√©thode qui ex√©cute un zoom sur une image. Elle re√ßoit en param√®tre les 4
+         * coordonn√©es souhait√©es de l'image.
+         * 
+         * @param x1
+         *            Valeur X pour le premier point de l'image
+         * @param y1
+         *            Valeur Y pour le premier point de l'image
+         * @param x2
+         *            Valeur X pour le deuxi√®me point de l'image
+         * @param y2
+         *            Valeur Y pour le deuxi√®me point de l'image
+         */
+        public void executerZoom(int x1, int x2, int y1, int y2) {
+                i = mv.getImage();
+                largeurMax = i.getLargeurOriginal();
+                hauteurMax = i.getHauteurOriginale();
 
-		zoomX(x1, x2);
-		zoomY(y1, y2);
-		creerImage();
-	}
+                zoomX(x1, x2);
+                zoomY(y1, y2);
+                creerImage();
+        }
 
-	/**
-	 * MÈthode qui exÈcute la translation sur les valeurs X. Elle reÁoit en
-	 * paramËtre le Memento d'une image
-	 * 
-	 * @param x1
-	 *            Valeur X du premier point de l'image
-	 * @param x2
-	 *            Valeur X du deuxiËme point de l'image
-	 */
-	public void executerAnnuler(MementoImage mi) {
-		mv.setImage(mi.getState());
-	}
+        /**
+         * M√©thode qui ex√©cute la translation sur les valeurs X. Elle re√ßoit en
+         * param√®tre le Memento d'une image
+         * 
+         * @param x1
+         *            Valeur X du premier point de l'image
+         * @param x2
+         *            Valeur X du deuxi√®me point de l'image
+         */
+        public void executerAnnuler(MementoImage mi) {
+                mv.setImage(mi.getState());
+        }
 
-	/**
-	 * MÈthode qui exÈcute la translation sur les valeurs X. Elle reÁoit en
-	 * paramËtre le Memento d'une image
-	 * 
-	 * @param x1
-	 *            Valeur X du premier point de l'image
-	 * @param x2
-	 *            Valeur X du deuxiËme point de l'image
-	 */
-	public void executerInitialiser(MementoImage mi) {
-		i = mi.getState().getclone();
-		creerImage();
-	}
+        /**
+         * M√©thode qui ex√©cute la translation sur les valeurs X. Elle re√ßoit en
+         * param√®tre le Memento d'une image
+         * 
+         * @param x1
+         *            Valeur X du premier point de l'image
+         * @param x2
+         *            Valeur X du deuxi√®me point de l'image
+         */
+        public void executerInitialiser(MementoImage mi) {
+                i = mi.getState().getclone();
+                creerImage();
+        }
 
-	/**
-	 * MÈthode qui effectue la translation sur les X. Elle reÁoit en paramËtre
-	 * les coordonÈes X souhaitÈes de l'image
-	 * 
-	 * @param x1
-	 *            Valeur X pour le premier point de l'image
-	 * @param x2
-	 *            Valeur X pour le deuxiËme point de l'image
-	 */
-	public void translaterX(int x1, int x2) {
+        /**
+         * M√©thode qui effectue la translation sur les X. Elle re√ßoit en param√®tre
+         * les coordon√©es X souhait√©es de l'image
+         * 
+         * @param x1
+         *            Valeur X pour le premier point de l'image
+         * @param x2
+         *            Valeur X pour le deuxi√®me point de l'image
+         */
+        public void translaterX(int x1, int x2) {
 
-		int largeurActuelle = i.getX2() - i.getX1();
+                int largeurActuelle = i.getX2() - i.getX1();
 
-		if (!(verifierBornesX1(x1))) {
-			i.setX1(0);
-			i.setX2(largeurActuelle);
-		} else if (!(verifierBornesX2(x2))) {
-			i.setX2(largeurMax);
-			i.setX1(largeurMax - largeurActuelle);
-		} else {
-			i.setX1(x1);
-			i.setX2(x2);
-		}
-	}
+                if (!(verifierBornesX1(x1))) {
+                        i.setX1(0);
+                        i.setX2(largeurActuelle);
+                } else if (!(verifierBornesX2(x2))) {
+                        i.setX2(largeurMax);
+                        i.setX1(largeurMax - largeurActuelle);
+                } else {
+                        i.setX1(x1);
+                        i.setX2(x2);
+                }
+        }
 
-	/**
-	 * MÈthode qui exÈcute une translation sur les valeurs Y. Elle reÁoit en
-	 * paramËtre les coordonnÈes Y souhaitÈes de l'image.
-	 * 
-	 * @param y1
-	 *            Valeur Y du premier point de l'image
-	 * @param y2
-	 *            Valeur Y du deuxiËme point de l'image
-	 */
-	public void translaterY(int y1, int y2) {
+        /**
+         * M√©thode qui ex√©cute une translation sur les valeurs Y. Elle re√ßoit en
+         * param√®tre les coordonn√©es Y souhait√©es de l'image.
+         * 
+         * @param y1
+         *            Valeur Y du premier point de l'image
+         * @param y2
+         *            Valeur Y du deuxi√®me point de l'image
+         */
+        public void translaterY(int y1, int y2) {
 
-		int hauteurActuelle = i.getY2() - i.getY1();
+                int hauteurActuelle = i.getY2() - i.getY1();
 
-		if (!(verifierBornesY1(y1))) {
-			i.setY1(0);
-			i.setY2(hauteurActuelle);
-		} else if (!(verifierBornesY2(y2))) {
-			i.setY2(hauteurMax);
-			i.setY1(hauteurMax - hauteurActuelle);
-		} else {
-			i.setY1(y1);
-			i.setY2(y2);
-		}
-	}
+                if (!(verifierBornesY1(y1))) {
+                        i.setY1(0);
+                        i.setY2(hauteurActuelle);
+                } else if (!(verifierBornesY2(y2))) {
+                        i.setY2(hauteurMax);
+                        i.setY1(hauteurMax - hauteurActuelle);
+                } else {
+                        i.setY1(y1);
+                        i.setY2(y2);
+                }
+        }
 
-	/**
-	 * MÈthode qui effectue un zoom sur les coordonÈes X des 2 points de
-	 * l'image. Elle recoit en paramËtre les coordonnÈes X souhaitÈes de
-	 * l'image.
-	 * 
-	 * @param x1
-	 *            CoordonnÈe X du premier point de l'image
-	 * @param x2
-	 *            CoordonnÈe X du deuxiËme point de l'image
-	 */
-	public void zoomX(int x1, int x2) {
+        /**
+         * M√©thode qui effectue un zoom sur les coordon√©es X des 2 points de
+         * l'image. Elle recoit en param√®tre les coordonn√©es X souhait√©es de
+         * l'image.
+         * 
+         * @param x1
+         *            Coordonn√©e X du premier point de l'image
+         * @param x2
+         *            Coordonn√©e X du deuxi√®me point de l'image
+         */
+        public void zoomX(int x1, int x2) {
 
-		if (x1 >= x2) {
-			// On ne fait rien si les coordonnÈes sont inversÈes
-		} else if (!(verifierBornesX1(x1))) {
-			if (!verifierBornesX2(i.getX1() + i.getX2())) {
-				i.setX2(i.getLargeurOriginal());
-			} else {
-				i.setX2(i.getX1() + i.getX2());
-			}
-			i.setX1(0);
-		} else if (!(verifierBornesX2(x2))) {
-			i.setX1(i.getX1() - (i.getLargeurOriginal() - i.getX2()));
-			i.setX2(i.getLargeurOriginal());
-		} else {
-			i.setX1(x1);
-			i.setX2(x2);
-		}
-	}
+                if (x1 >= x2) {
+                        // On ne fait rien si les coordonn√©es sont invers√©es
+                } else if (!(verifierBornesX1(x1))) {
+                        if (!verifierBornesX2(i.getX1() + i.getX2())) {
+                                i.setX2(i.getLargeurOriginal());
+                        } else {
+                                i.setX2(i.getX1() + i.getX2());
+                        }
+                        i.setX1(0);
+                } else if (!(verifierBornesX2(x2))) {
+                        i.setX1(i.getX1() - (i.getLargeurOriginal() - i.getX2()));
+                        i.setX2(i.getLargeurOriginal());
+                } else {
+                        i.setX1(x1);
+                        i.setX2(x2);
+                }
+        }
 
-	/**
-	 * MÈthode qui effectue un zoom sur les coordonnÈes Y des 2 points de
-	 * l'image. Elle reÁoit en paramËtre les coordonnÈes Y souhaitÈes de
-	 * l'image.
-	 * 
-	 * @param y1
-	 *            CoordonnÈe Y du premier point de l'image
-	 * @param y2
-	 *            CoordonnÈe Y du deuxiËme point de l'image
-	 */
-	public void zoomY(int y1, int y2) {
+        /**
+         * M√©thode qui effectue un zoom sur les coordonn√©es Y des 2 points de
+         * l'image. Elle re√ßoit en param√®tre les coordonn√©es Y souhait√©es de
+         * l'image.
+         * 
+         * @param y1
+         *            Coordonn√©e Y du premier point de l'image
+         * @param y2
+         *            Coordonn√©e Y du deuxi√®me point de l'image
+         */
+        public void zoomY(int y1, int y2) {
+                if (y1 >= y2) {
+                	if(i.getY1()>y1 )
+                		i.setZoom(-25);
+                	else if(i.getZoom()<=350)
+                		i.setZoom(25);
+                	
+                } else if (!(verifierBornesY1(y1))) {
+                        if (!verifierBornesY2(i.getY2() + i.getY1())) {
+                        		System.out.println("4");
+                                i.setY2(i.getHauteurOriginale());
+                                if(i.getZoom()>=25)
+                                	i.setZoom(-25);
+                        } else {
+                                i.setY2(i.getY2() + i.getY1());
+                                System.out.println("1");
+                        }
+                        i.setY1(0);
+                } else if (!(verifierBornesY2(y2))) {
+                        i.setY1(i.getY1() - (i.getHauteurOriginale() - i.getY2()));
+                        i.setY2(i.getHauteurOriginale());
+                        System.out.println("2");
+                } else {
+                	System.out.println("3");
+                	if(i.getY1()>y1 )
+                		i.setZoom(-25);
+                	else if(i.getZoom()<=350)
+                		i.setZoom(25);
+                	
+                    i.setY1(y1);
+                    i.setY2(y2);
+                }
+                System.out.println(i.getZoom());
+        }
 
-		if (y1 >= y2) {
-			// On ne fait rien si les coordonnÈes sont inversÈes
-		} else if (!(verifierBornesY1(y1))) {
-			if (!verifierBornesY2(i.getY2() + i.getY1())) {
-				i.setY2(i.getHauteurOriginale());
-			} else {
-				i.setY2(i.getY2() + i.getY1());
-			}
-			i.setY1(0);
-		} else if (!(verifierBornesY2(y2))) {
-			i.setY1(i.getY1() - (i.getHauteurOriginale() - i.getY2()));
-			i.setY2(i.getHauteurOriginale());
-		} else {
-			i.setY1(y1);
-			i.setY2(y2);
-		}
-	}
+        /**
+         * M√©thode qui v√©rifit les bornes X pour le premier point de l'image Elle
+         * re√ßoit en param√®tre la borne x1 de l'image.
+         * 
+         * @param x1
+         *            Valeur X du premier point de l'image
+         * @return Si les bornes sont valide ou non
+         */
+        public boolean verifierBornesX1(int x1) {
+                if (x1 > 0) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 
-	/**
-	 * MÈthode qui vÈrifit les bornes X pour le premier point de l'image Elle
-	 * reÁoit en paramËtre la borne x1 de l'image.
-	 * 
-	 * @param x1
-	 *            Valeur X du premier point de l'image
-	 * @return Si les bornes sont valide ou non
-	 */
-	public boolean verifierBornesX1(int x1) {
-		if (x1 > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        /**
+         * M√©thode qui v√©rifit les bornes X pour le deuxi√®me point de l'image Elle
+         * re√ßoit en param√®tre la borne x2 de l'image.
+         * 
+         * @param x2
+         *            Valeur X du deuxi√®me point de l'image
+         * @return Si les bornes sont valides ou non
+         */
+        public boolean verifierBornesX2(int x2) {
+                if (x2 < largeurMax) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 
-	/**
-	 * MÈthode qui vÈrifit les bornes X pour le deuxiËme point de l'image Elle
-	 * reÁoit en paramËtre la borne x2 de l'image.
-	 * 
-	 * @param x2
-	 *            Valeur X du deuxiËme point de l'image
-	 * @return Si les bornes sont valides ou non
-	 */
-	public boolean verifierBornesX2(int x2) {
-		if (x2 < largeurMax) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        /**
+         * M√©thode qui v√©rifit les bornes Y du premier point de l'image Elle re√ßoit
+         * en param√®tre la borne Y1 de l'image
+         * 
+         * @param y1
+         *            La valeur Y du premier point de l'image
+         * @return Si les bornes sont valides ou non
+         */
+        public boolean verifierBornesY1(int y1) {
+                if (y1 > 0) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 
-	/**
-	 * MÈthode qui vÈrifit les bornes Y du premier point de l'image Elle reÁoit
-	 * en paramËtre la borne Y1 de l'image
-	 * 
-	 * @param y1
-	 *            La valeur Y du premier point de l'image
-	 * @return Si les bornes sont valides ou non
-	 */
-	public boolean verifierBornesY1(int y1) {
-		if (y1 > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        /**
+         * M√©thode qui v√©rifit si les bornes Y du deuxi√®me point de l'image sont
+         * valides Elle re√ßoit en param√®tre la borne y2 de l'image
+         * 
+         * @param y2
+         * @return Si les bornes sont valides ou non
+         */
+        public boolean verifierBornesY2(int y2) {
+                if (y2 < hauteurMax) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 
-	/**
-	 * MÈthode qui vÈrifit si les bornes Y du deuxiËme point de l'image sont
-	 * valides Elle reÁoit en paramËtre la borne y2 de l'image
-	 * 
-	 * @param y2
-	 * @return Si les bornes sont valides ou non
-	 */
-	public boolean verifierBornesY2(int y2) {
-		if (y2 < hauteurMax) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * MÈthode qui crÈer l'image initiale sÈlectionnÈe par l'utilisateur Elle
-	 * reÁoit en paramËtre le chemin d'accËs de l'image et les 2 dimensions
-	 * originales de l'image
-	 * 
-	 * @param path
-	 *            Chemin d'accËs de l'image
-	 * @param largeurOriginale
-	 *            Largeur de l'image initiale
-	 * @param hauteurOriginale
-	 *            Hauteur de l'image initiale
-	 */
-	public void creerImageInitiale(String path, int largeurOriginale,
-			int hauteurOriginale) {
-		i = new Image(path, largeurOriginale, hauteurOriginale);
-		creerImage();
-	}
-	
-	/**
-	 * Cette mÈthode crÈe une image.
-	 */
-	private void creerImage() {
-		Origine.setState(i.getclone());
-		mv.setImage(i);
-	}
+        /**
+         * M√©thode qui cr√©er l'image initiale s√©lectionn√©e par l'utilisateur Elle
+         * re√ßoit en param√®tre le chemin d'acc√®s de l'image et les 2 dimensions
+         * originales de l'image
+         * 
+         * @param path
+         *            Chemin d'acc√®s de l'image
+         * @param largeurOriginale
+         *            Largeur de l'image initiale
+         * @param hauteurOriginale
+         *            Hauteur de l'image initiale
+         */
+        public void creerImageInitiale(String path, int largeurOriginale,
+                        int hauteurOriginale) {
+                i = new Image(path, largeurOriginale, hauteurOriginale);
+                creerImage();
+        }
+        
+        /**
+         * Cette m√©thode cr√©e une image.
+         */
+        private void creerImage() {
+                Origine.setState(i.getclone());
+                mv.setImage(i);
+        }
 }
