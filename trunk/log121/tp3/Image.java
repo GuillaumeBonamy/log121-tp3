@@ -1,12 +1,19 @@
 package log121.tp3;
 
+import java.text.DecimalFormat;
+
 public class Image implements Cloneable {
 
         private int x1, x2, y1, y2;
         private int largeurOriginale, hauteurOriginale;
         private String cheminImage;
-        private int zoom=0;
-
+        private int zoom;
+        private final int FACTEUR_ZOOM = 25;
+        private int nbZoom;
+        
+        private final double RAPPORT_DE_ZOOM=2.155;
+        //2.155 a été trouvé en faisant la moyenne sur 5 images de la taille diviser par le nombre de zoom trouvé manuellement.
+        
         /**
          * Constructeur de la classe Image
          * 
@@ -19,8 +26,58 @@ public class Image implements Cloneable {
                 this.hauteurOriginale = hauteurOriginale;
                 this.x2 = largeurOriginale;
                 this.y2 = hauteurOriginale;
+                this.zoom=0;
+                calculerZoomMax();
         }
 
+        
+        /**
+         * Methode permettant de calculer le nombre de fois que l'on pourra zoomer
+         */
+        public void calculerZoomMax()
+        {
+        	
+        	double zoomDouble;
+        	//Si l'image est plus haute que large
+			if(this.largeurOriginale < this.hauteurOriginale) {
+				//si le hauteur de l'image est inférieur à 350 (nombre trouvé après différents test à la main)
+				if(this.hauteurOriginale<350) {
+					zoomDouble = ((this.hauteurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM)-1;
+					//on retire 1 car sinon il y a un tirets dans le slider en trop parce que l'image est trop petite
+				} else {
+					zoomDouble = ((this.hauteurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM);
+				}
+			} else {
+        		if(this.largeurOriginale<350)
+        			zoomDouble = ((this.largeurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM)-1;
+        		else {
+        			zoomDouble = (this.largeurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM;
+				}
+			}
+        	
+        	DecimalFormat df = new DecimalFormat () ; 
+    		df.setMaximumFractionDigits (0); //arrondi le chiffre
+    		df.setMinimumFractionDigits (0); 
+    		 
+    		this.nbZoom=Integer.parseInt(df.format(zoomDouble));
+
+        }
+        
+        /**
+         * Methode modifiant le nombre de zoom max de l'image
+         * @param nbZoom le nouveau nombre de zoom
+         */
+        public void setNbZoom(int nbZoom) {
+			this.nbZoom=nbZoom;
+        }
+		
+        /**
+         * @return le nombre de zoom max sur l'image
+         */
+        public int getNbZoom()
+        {
+        	return nbZoom;
+        }
         /**
          * @return le zoom de l'image
          */
@@ -30,7 +87,7 @@ public class Image implements Cloneable {
          * Modifie le zoom de l'image
          * @param newZoom le nombre a ajouté pour avoir le nouveau zoom
          */
-        public void setZoom(int newZoom) { this.zoom = this.zoom + newZoom; }
+        public void setZoom(int newZoom) { this.zoom = newZoom; }
         
         /**
          * @return L'emplacement de l'image
