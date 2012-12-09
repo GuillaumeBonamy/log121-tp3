@@ -206,37 +206,26 @@ public class Receveur {
          */
         public void zoomY(int y1, int y2) {
                 if (y1 >= y2) {
-                	if(i.getY1()>y1 )
-                		i.setZoom(-25);
-                	else if(i.getZoom()<=350)
-                		i.setZoom(25);
                 	
+                	// On ne fait rien si les coordonnées sont inversées
                 } else if (!(verifierBornesY1(y1))) {
                         if (!verifierBornesY2(i.getY2() + i.getY1())) {
-                        		System.out.println("4");
                                 i.setY2(i.getHauteurOriginale());
-                                if(i.getZoom()>=25)
-                                	i.setZoom(-25);
+                                
                         } else {
                                 i.setY2(i.getY2() + i.getY1());
-                                System.out.println("1");
                         }
+                        
                         i.setY1(0);
                 } else if (!(verifierBornesY2(y2))) {
                         i.setY1(i.getY1() - (i.getHauteurOriginale() - i.getY2()));
                         i.setY2(i.getHauteurOriginale());
-                        System.out.println("2");
+                        
                 } else {
-                	System.out.println("3");
-                	if(i.getY1()>y1 )
-                		i.setZoom(-25);
-                	else if(i.getZoom()<=350)
-                		i.setZoom(25);
-                	
-                    i.setY1(y1);
+                	i.setY1(y1);
                     i.setY2(y2);
                 }
-                System.out.println(i.getZoom());
+                
         }
 
         /**
