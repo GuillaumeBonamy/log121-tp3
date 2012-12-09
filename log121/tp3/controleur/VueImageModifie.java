@@ -257,13 +257,11 @@ public class VueImageModifie extends JFrame implements ActionListener,
         @Override
         public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
-
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
                 // TODO Auto-generated method stub
-
         }
 
         @Override
@@ -273,9 +271,9 @@ public class VueImageModifie extends JFrame implements ActionListener,
         }
         
         @Override
-        public void mousePressed(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
+        public void mousePressed(MouseEvent e) {
+        	clickX = e.getX();
+        	clickY = e.getY();
         }
 
         @Override
