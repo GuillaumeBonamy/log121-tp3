@@ -35,6 +35,8 @@ public class VueImageModifie extends JFrame implements ActionListener,
         private JMenuItem translationDroite;
         private JMenuItem translationGauche;
         private JMenuItem zoomIn;
+        private JMenuItem imageInitiale;
+        private JMenuItem annuler;
         private JMenuItem zoomOut;
         private JPanel panelImage;
         private JLabel labelImage;
@@ -42,6 +44,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
         private Image img;
         private int clickX;
         private int clickY;
+        private boolean mouseDragged = false;
      
         
         private final int DEPLACEMENT = 50;
@@ -103,6 +106,8 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 menuBar = new JMenuBar();
 
                 menuAction = new JMenu("Action");
+                annuler = new JMenuItem("Annuler");
+                imageInitiale = new JMenuItem("Image initiale");
                 translationBas = new JMenuItem("Translation en bas");
                 translationDroite = new JMenuItem("Translation à droite");
                 translationGauche = new JMenuItem("Translation à gauche");
@@ -127,9 +132,16 @@ public class VueImageModifie extends JFrame implements ActionListener,
 
                 menuAction.add(zoomOut);
                 zoomOut.addActionListener(this);
-
+               
+                menuAction.add(annuler);
+                annuler.addActionListener(this);
+                annuler.setEnabled(false);
+                annuler.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
                 menuBar.add(menuAction);
-
+                
+                menuAction.add(imageInitiale);
+                imageInitiale.addActionListener(this);
+                imageInitiale.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
                 this.setJMenuBar(menuBar);
         }
 
@@ -138,32 +150,41 @@ public class VueImageModifie extends JFrame implements ActionListener,
          */
         public void actionPerformed(ActionEvent e) {
                 
+        		if(e.getSource()  == imageInitiale) {
+        			Controleur.getInstance().initialiser();
+        			addMemento();
+        		}
+        		else if(e.getSource() == annuler) {
+        			Controleur.getInstance().annuler();
+        			verifierSiAnnulerPossible();
+        		}
+        			
                 if (e.getSource() == translationBas) {
                         Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
                                         img.getY1() + DEPLACEMENT, img.getY2()+ DEPLACEMENT);
-                        
+                        addMemento();
                 } else if (e.getSource() == translationDroite) {
                         Controleur.getInstance().faireTranslation(img.getX1() + DEPLACEMENT, img.getX2() + DEPLACEMENT, 
                                         img.getY1(), img.getY2());
-                        
+                        addMemento();
                 } else if (e.getSource() == translationGauche) {
                         Controleur.getInstance().faireTranslation(img.getX1() - DEPLACEMENT, img.getX2() - DEPLACEMENT, 
                                         img.getY1(), img.getY2());
-                        
+                        addMemento();
                 } else if (e.getSource() == translationHaut) {
                         Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
                                         img.getY1() - DEPLACEMENT, img.getY2() - DEPLACEMENT);
-                        
+                        addMemento();
                 } else if (e.getSource() == zoomIn) {
                 	
                         Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
                                         img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
-                        
+                        addMemento();
                 } else if (e.getSource() == zoomOut) {
                 	
                     Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
                                         img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
-
+                    	addMemento();
                 }
         }
 
@@ -173,12 +194,12 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 	
                         Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
                                         img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
-                        
+                        addMemento();
                 	   
                 } else {
                     Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
                                         img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
-   
+                    addMemento();
                 }
         }
         
@@ -189,6 +210,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 
                 clickX = e.getX();
                 clickY = e.getY();
+                mouseDragged=true;
         }
 
         @Override
@@ -217,13 +239,16 @@ public class VueImageModifie extends JFrame implements ActionListener,
 
         @Override
         public void mousePressed(MouseEvent e) {
-                clickX = e.getX();
-                clickY = e.getY();
+                /*clickX = e.getX();
+                clickY = e.getY();*/
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
+               if(mouseDragged) {
+            	   Controleur.getInstance().addMemento();
+               }
+               mouseDragged=false;
                 
         }
         
@@ -232,5 +257,22 @@ public class VueImageModifie extends JFrame implements ActionListener,
         public void update(Observable obs, Object obj) {
                 img = Controleur.getInstance().getImageModeleVue();
                 labelImage.setIcon(dessinerIconeImage());
+        }
+        
+        /**
+         * Cette méthode ajoute un memento d'image
+         */
+        private void addMemento()
+        {
+        	Controleur.getInstance().addMemento();
+        	verifierSiAnnulerPossible();
+        }
+        
+        /**
+         * Cette méthode vérifie s'il est possible de faire une annulation
+         */
+        private void verifierSiAnnulerPossible()
+        {
+        	annuler.setEnabled(GestionnaireCommande.getInstance().verifierSiAnnulerPossible());
         }
 }
