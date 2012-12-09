@@ -26,253 +26,269 @@ import log121.tp3.GestionnaireCommande;
 import log121.tp3.Image;
 
 public class VueImageModifie extends JFrame implements ActionListener,
-                MouseWheelListener, MouseMotionListener, MouseListener, Observer {
+		MouseWheelListener, MouseMotionListener, MouseListener, Observer {
 
-        private JMenuBar menuBar;
-        private JMenu menuAction;
-        private JMenuItem translationHaut;
-        private JMenuItem translationBas;
-        private JMenuItem translationDroite;
-        private JMenuItem translationGauche;
-        private JMenuItem zoomIn;
-        private JMenuItem imageInitiale;
-        private JMenuItem annuler;
-        private JMenuItem zoomOut;
-        private JPanel panelImage;
-        private JLabel labelImage;
-        private ImageIcon iconeImage;
-        private Image img;
-        private int clickX;
-        private int clickY;
-        private boolean mouseDragged = false;
-     
-        
-        private final int DEPLACEMENT = 50;
-        private final int FACTEUR_ZOOM = 25;
+	private JMenuBar menuBar;
+	private JMenu menuAction;
+	private JMenuItem imageInitiale;
+	private JMenuItem annuler;
+	private JMenuItem translationHaut;
+	private JMenuItem translationBas;
+	private JMenuItem translationDroite;
+	private JMenuItem translationGauche;
+	private JMenuItem zoomIn;
+	private JMenuItem zoomOut;
+	private JPanel panelImage;
+	private JLabel labelImage;
+	private ImageIcon iconeImage;
+	private Image img;
+	private int clickX;
+	private int clickY;
+	private boolean mouseDragged = false;
+	private VueStatistiques vueStat;
 
-        /**
-         * Cette fonction dessine une image et retourne un icone correspondant à
-         * l'image.
-         * 
-         * @return l'icon de l'image.
-         */
-        private ImageIcon dessinerIconeImage() {
-                int type = BufferedImage.TYPE_INT_RGB;
+	private final int DEPLACEMENT = 50;
+	private final int FACTEUR_ZOOM = 25;
 
-                BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
-                                img.getHauteurOriginale(), type);
-                Graphics2D g2 = bi.createGraphics();
+	/**
+	 * Cette fonction dessine une image et retourne un icone correspondant à
+	 * l'image.
+	 * 
+	 * @return l'icon de l'image.
+	 */
+	private ImageIcon dessinerIconeImage() {
+		int type = BufferedImage.TYPE_INT_RGB;
 
-                g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
-                                img.getHauteurOriginale(), img.getX1(), img.getY1(),
-                                img.getX2(), img.getY2(), this);
+		BufferedImage bi = new BufferedImage(img.getLargeurOriginal(),
+				img.getHauteurOriginale(), type);
+		Graphics2D g2 = bi.createGraphics();
 
-                return new ImageIcon(bi);
-        }
+		g2.drawImage(iconeImage.getImage(), 0, 0, img.getLargeurOriginal(),
+				img.getHauteurOriginale(), img.getX1(), img.getY1(),
+				img.getX2(), img.getY2(), this);
 
-        /**
-         * Constructeur de la classe VueImageModifie
-         * 
-         * @param img
-         *            L'image a affiche dans la fenetre
-         */
-        public VueImageModifie() {
-                setTitle("Vue image modifie");
-                setLocation(450, 450);
-                setSize(400, 400);
+		return new ImageIcon(bi);
+	}
 
-                
-                creerMenu();
+	/**
+	 * Constructeur de la classe VueImageModifie
+	 * 
+	 * @param img
+	 *            L'image a affiche dans la fenetre
+	 */
+	public VueImageModifie(VueStatistiques vueStat) {
+		setTitle("Vue image modifie");
+		setLocation(450, 450);
+		setSize(400, 400);
 
-                this.img = Controleur.getInstance().getImageModeleVue();
-                iconeImage = new ImageIcon(img.getCheminImage());
+		this.vueStat = vueStat;
 
-                this.panelImage = new JPanel();
-                this.labelImage = new JLabel(dessinerIconeImage());
-                labelImage.addMouseWheelListener(this);
-                labelImage.addMouseMotionListener(this);
-                labelImage.addMouseListener(this);
+		creerMenu();
 
-                this.panelImage.add(labelImage);
+		this.img = Controleur.getInstance().getImageModeleVue();
+		iconeImage = new ImageIcon(img.getCheminImage());
 
-                
-                this.add(panelImage);
-        }
+		this.panelImage = new JPanel();
+		this.labelImage = new JLabel(dessinerIconeImage());
+		labelImage.addMouseWheelListener(this);
+		labelImage.addMouseMotionListener(this);
+		labelImage.addMouseListener(this);
 
-        /**
-         * Methode permettant de creer le menu de la fenetre
-         */
-        private void creerMenu() {
-                menuBar = new JMenuBar();
+		this.panelImage.add(labelImage);
 
-                menuAction = new JMenu("Action");
-                annuler = new JMenuItem("Annuler");
-                imageInitiale = new JMenuItem("Image initiale");
-                translationBas = new JMenuItem("Translation en bas");
-                translationDroite = new JMenuItem("Translation à droite");
-                translationGauche = new JMenuItem("Translation à gauche");
-                translationHaut = new JMenuItem("Translation en haut");
-                zoomIn = new JMenuItem("Zoom In");
-                zoomOut = new JMenuItem("Zoom Out");
+		this.add(panelImage);
+	}
 
-                menuAction.add(translationBas);
-                translationBas.addActionListener(this);
+	/**
+	 * Methode permettant de creer le menu de la fenetre
+	 */
+	private void creerMenu() {
+		menuBar = new JMenuBar();
 
-                menuAction.add(translationDroite);
-                translationDroite.addActionListener(this);
+		menuAction = new JMenu("Action");
+		annuler = new JMenuItem("Annuler");
+		imageInitiale = new JMenuItem("Image initiale");
+		translationBas = new JMenuItem("Translation en bas");
+		translationDroite = new JMenuItem("Translation à droite");
+		translationGauche = new JMenuItem("Translation à gauche");
+		translationHaut = new JMenuItem("Translation en haut");
+		zoomIn = new JMenuItem("Zoom In");
+		zoomOut = new JMenuItem("Zoom Out");
 
-                menuAction.add(translationGauche);
-                translationGauche.addActionListener(this);
+		menuAction.add(imageInitiale);
+		imageInitiale.addActionListener(this);
+		imageInitiale.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
+				ActionEvent.CTRL_MASK));
 
-                menuAction.add(translationHaut);
-                translationHaut.addActionListener(this);
+		menuAction.add(annuler);
+		annuler.addActionListener(this);
+		annuler.setEnabled(false);
+		annuler.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+				ActionEvent.CTRL_MASK));
 
-                menuAction.add(zoomIn);
-                zoomIn.addActionListener(this);
+		menuAction.add(translationBas);
+		translationBas.addActionListener(this);
 
-                menuAction.add(zoomOut);
-                zoomOut.addActionListener(this);
-               
-                menuAction.add(annuler);
-                annuler.addActionListener(this);
-                annuler.setEnabled(false);
-                annuler.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
-                menuBar.add(menuAction);
-                
-                menuAction.add(imageInitiale);
-                imageInitiale.addActionListener(this);
-                imageInitiale.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
-                this.setJMenuBar(menuBar);
-        }
+		menuAction.add(translationDroite);
+		translationDroite.addActionListener(this);
 
-        /**
-         * Methode permettant de gerer les actions sur les items
-         */
-        public void actionPerformed(ActionEvent e) {
-                
-        		if(e.getSource()  == imageInitiale) {
-        			Controleur.getInstance().initialiser();
-        			addMemento();
-        		}
-        		else if(e.getSource() == annuler) {
-        			Controleur.getInstance().annuler();
-        			verifierSiAnnulerPossible();
-        		}
-        			
-                if (e.getSource() == translationBas) {
-                        Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
-                                        img.getY1() + DEPLACEMENT, img.getY2()+ DEPLACEMENT);
-                        addMemento();
-                } else if (e.getSource() == translationDroite) {
-                        Controleur.getInstance().faireTranslation(img.getX1() + DEPLACEMENT, img.getX2() + DEPLACEMENT, 
-                                        img.getY1(), img.getY2());
-                        addMemento();
-                } else if (e.getSource() == translationGauche) {
-                        Controleur.getInstance().faireTranslation(img.getX1() - DEPLACEMENT, img.getX2() - DEPLACEMENT, 
-                                        img.getY1(), img.getY2());
-                        addMemento();
-                } else if (e.getSource() == translationHaut) {
-                        Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(), 
-                                        img.getY1() - DEPLACEMENT, img.getY2() - DEPLACEMENT);
-                        addMemento();
-                } else if (e.getSource() == zoomIn) {
-                	
-                        Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
-                                        img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
-                        addMemento();
-                } else if (e.getSource() == zoomOut) {
-                	
-                    Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
-                                        img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
-                    	addMemento();
-                }
-        }
+		menuAction.add(translationGauche);
+		translationGauche.addActionListener(this);
 
-        @Override
-        public void mouseWheelMoved(MouseWheelEvent e) {
-                if (e.getWheelRotation() < 0) {
-                	
-                        Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM, img.getX2() - FACTEUR_ZOOM, 
-                                        img.getY1() + FACTEUR_ZOOM, img.getY2() - FACTEUR_ZOOM);
-                        addMemento();
-                	   
-                } else {
-                    Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM, img.getX2() + FACTEUR_ZOOM, 
-                                        img.getY1() - FACTEUR_ZOOM, img.getY2() + FACTEUR_ZOOM);
-                    addMemento();
-                }
-        }
-        
-        @Override
-        public void mouseDragged(MouseEvent e) {                
-                Controleur.getInstance().faireTranslation(img.getX1() - (e.getX() - clickX), img.getX2() - (e.getX() - clickX), 
-                                img.getY1() - (e.getY() - clickY), img.getY2() - (e.getY() - clickY));
-                
-                clickX = e.getX();
-                clickY = e.getY();
-                mouseDragged=true;
-        }
+		menuAction.add(translationHaut);
+		translationHaut.addActionListener(this);
 
-        @Override
-        public void mouseMoved(MouseEvent e) {
-                // TODO Auto-generated method stub
+		menuAction.add(zoomIn);
+		zoomIn.addActionListener(this);
 
-        }
+		menuAction.add(zoomOut);
+		zoomOut.addActionListener(this);
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                
-        }
+		menuBar.add(menuAction);
 
-        @Override
-        public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-                
-        }
+		this.setJMenuBar(menuBar);
+	}
 
-        @Override
-        public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-                
-        }
+	/**
+	 * Methode permettant de gerer les actions sur les items
+	 */
+	public void actionPerformed(ActionEvent e) {
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-                /*clickX = e.getX();
-                clickY = e.getY();*/
-        }
+		if (e.getSource() == imageInitiale) {
+			Controleur.getInstance().initialiser();
+			addMemento();
 
-        @Override
-        public void mouseReleased(MouseEvent e) {
-               if(mouseDragged) {
-            	   Controleur.getInstance().addMemento();
-               }
-               mouseDragged=false;
-                
-        }
-        
-        // TEST
+		} else if (e.getSource() == annuler) {
+			Controleur.getInstance().annuler();
+			verifierSiAnnulerPossible();
 
-        public void update(Observable obs, Object obj) {
-                img = Controleur.getInstance().getImageModeleVue();
-                labelImage.setIcon(dessinerIconeImage());
-        }
-        
-        /**
-         * Cette méthode ajoute un memento d'image
-         */
-        private void addMemento()
-        {
-        	Controleur.getInstance().addMemento();
-        	verifierSiAnnulerPossible();
-        }
-        
-        /**
-         * Cette méthode vérifie s'il est possible de faire une annulation
-         */
-        private void verifierSiAnnulerPossible()
-        {
-        	annuler.setEnabled(GestionnaireCommande.getInstance().verifierSiAnnulerPossible());
-        }
+		} else if (e.getSource() == translationBas) {
+			Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(),
+					img.getY1() + DEPLACEMENT, img.getY2() + DEPLACEMENT);
+			addMemento();
+
+		} else if (e.getSource() == translationDroite) {
+			Controleur.getInstance().faireTranslation(
+					img.getX1() + DEPLACEMENT, img.getX2() + DEPLACEMENT,
+					img.getY1(), img.getY2());
+			addMemento();
+
+		} else if (e.getSource() == translationGauche) {
+			Controleur.getInstance().faireTranslation(
+					img.getX1() - DEPLACEMENT, img.getX2() - DEPLACEMENT,
+					img.getY1(), img.getY2());
+			addMemento();
+
+		} else if (e.getSource() == translationHaut) {
+			Controleur.getInstance().faireTranslation(img.getX1(), img.getX2(),
+					img.getY1() - DEPLACEMENT, img.getY2() - DEPLACEMENT);
+			addMemento();
+
+		} else if (e.getSource() == zoomIn) {
+			// on indique à la vue statistique que le zoom augmente
+			vueStat.setChangementSlider(1);
+			Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM,
+					img.getX2() - FACTEUR_ZOOM, img.getY1() + FACTEUR_ZOOM,
+					img.getY2() - FACTEUR_ZOOM);
+			addMemento();
+
+		} else if (e.getSource() == zoomOut) {
+			// on indique à la vue statistique que le zoom diminue
+			vueStat.setChangementSlider(0);
+			Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM,
+					img.getX2() + FACTEUR_ZOOM, img.getY1() - FACTEUR_ZOOM,
+					img.getY2() + FACTEUR_ZOOM);
+			addMemento();
+		}
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if (e.getWheelRotation() < 0) {
+			Controleur.getInstance().faireZoom(img.getX1() + FACTEUR_ZOOM,
+					img.getX2() - FACTEUR_ZOOM, img.getY1() + FACTEUR_ZOOM,
+					img.getY2() - FACTEUR_ZOOM);
+			addMemento();
+
+		} else {
+			Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM,
+					img.getX2() + FACTEUR_ZOOM, img.getY1() - FACTEUR_ZOOM,
+					img.getY2() + FACTEUR_ZOOM);
+			addMemento();
+
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		Controleur.getInstance().faireTranslation(
+				img.getX1() - (e.getX() - clickX),
+				img.getX2() - (e.getX() - clickX),
+				img.getY1() - (e.getY() - clickY),
+				img.getY2() - (e.getY() - clickY));
+
+		clickX = e.getX();
+		clickY = e.getY();
+		mouseDragged = true;
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if (mouseDragged) {
+			Controleur.getInstance().addMemento();
+		}
+		mouseDragged = false;
+
+	}
+	
+	public void update(Observable obs, Object obj) {
+		img = Controleur.getInstance().getImageModeleVue();
+		labelImage.setIcon(dessinerIconeImage());
+	}
+
+	/**
+	 * Cette m�thode ajoute un memento d'image.
+	 */
+	private void addMemento() {
+		Controleur.getInstance().addMemento();
+		verifierSiAnnulerPossible();
+	}
+
+	/**
+	 * Cette m�thode v�rifie s'il est possible de faire une annulation.
+	 */
+	private void verifierSiAnnulerPossible() {
+		annuler.setEnabled(GestionnaireCommande.getInstance()
+				.verifierSiAnnulerPossible());
+	}
 }
