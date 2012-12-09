@@ -14,6 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,6 +39,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
         private JMenuItem translationGauche;
         private JMenuItem zoomIn;
         private JMenuItem zoomOut;
+        private JMenuItem sauvegarder;
         private JPanel panelImage;
         private JLabel labelImage;
         private ImageIcon iconeImage;
@@ -113,6 +115,7 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 translationHaut = new JMenuItem("Translation en haut");
                 zoomIn = new JMenuItem("Zoom In");
                 zoomOut = new JMenuItem("Zoom Out");
+                sauvegarder = new JMenuItem("Sauvegarder");
 
                 menuAction.add(imageInitiale);
                 imageInitiale.addActionListener(this);
@@ -143,6 +146,9 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 menuAction.add(zoomOut);
                 zoomOut.addActionListener(this);
 
+                menuAction.add(sauvegarder);
+                sauvegarder.addActionListener(this);
+                
                 menuBar.add(menuAction);
 
                 this.setJMenuBar(menuBar);
@@ -196,6 +202,19 @@ public class VueImageModifie extends JFrame implements ActionListener,
                                         img.getX2() + FACTEUR_ZOOM, img.getY1() - FACTEUR_ZOOM,
                                         img.getY2() + FACTEUR_ZOOM);
                         addMemento();
+                } else if (e.getSource() == sauvegarder) {
+                    System.out.println("ok");
+                    JFileChooser fc = new JFileChooser("Enregistrer sous");
+                    fc.showOpenDialog(this);
+                    if (fc.getSelectedFile() == null)
+                            return;
+                    
+                    System.out.println();
+                   Controleur.getInstance().sauvegarder(fc.getSelectedFile().getAbsolutePath());
+                   /* Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM,
+                                    img.getX2() + FACTEUR_ZOOM, img.getY1() - FACTEUR_ZOOM,
+                                    img.getY2() + FACTEUR_ZOOM);
+                    addMemento();*/
                 }
         }
 

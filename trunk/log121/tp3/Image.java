@@ -1,8 +1,9 @@
 package log121.tp3;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Image implements Cloneable {
+public class Image implements Cloneable, Serializable {
 
         private int x1, x2, y1, y2;
         private int largeurOriginale, hauteurOriginale;
