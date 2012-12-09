@@ -40,19 +40,13 @@ public class Image implements Cloneable {
         	double zoomDouble;
         	//Si l'image est plus haute que large
 			if(this.largeurOriginale < this.hauteurOriginale) {
-				//si le hauteur de l'image est inférieur à 350 (nombre trouvé après différents test à la main)
-				if(this.hauteurOriginale<350) {
-					zoomDouble = ((this.hauteurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM)-1;
-					//on retire 1 car sinon il y a un tirets dans le slider en trop parce que l'image est trop petite
-				} else {
+				
 					zoomDouble = ((this.hauteurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM);
-				}
+				
 			} else {
-        		if(this.largeurOriginale<350)
-        			zoomDouble = ((this.largeurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM)-1;
-        		else {
+        		
         			zoomDouble = (this.largeurOriginale/RAPPORT_DE_ZOOM)/FACTEUR_ZOOM;
-				}
+				
 			}
         	
         	DecimalFormat df = new DecimalFormat () ; 
