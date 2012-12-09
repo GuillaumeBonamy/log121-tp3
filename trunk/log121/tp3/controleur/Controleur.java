@@ -77,9 +77,10 @@ public class Controleur {
 	 */
 	public void annuler() {
 		// On r�cup�re la derni�re image
-		MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
+		//MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
 		//On supprime l'image de l'arraylist en même temps
 		GestionnaireCommande.getInstance().delMementoImage();
+		MementoImage mi = GestionnaireCommande.getInstance().getMementoImage();
 		// On cr�e la commande avec la derni�re image et on l'ajoute au
 		// gestionnaire
 		GestionnaireCommande.getInstance().setCommande(new CommandeAnnuler(mi));

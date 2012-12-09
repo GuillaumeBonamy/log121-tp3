@@ -110,11 +110,11 @@ public class VueImageModifie extends JFrame implements ActionListener,
                 annuler = new JMenuItem("Annuler");
                 imageInitiale = new JMenuItem("Image initiale");
                 translationBas = new JMenuItem("Translation en bas");
-                translationDroite = new JMenuItem("Translation à droite");
-                translationGauche = new JMenuItem("Translation à gauche");
+                translationDroite = new JMenuItem("Translation ï¿½ droite");
+                translationGauche = new JMenuItem("Translation ï¿½ gauche");
                 translationHaut = new JMenuItem("Translation en haut");
                 zoomIn = new JMenuItem("Zoom Avant");
-                zoomOut = new JMenuItem("Zoom Arrière");
+                zoomOut = new JMenuItem("Zoom Arriï¿½re");
                 sauvegarder = new JMenuItem("Sauvegarder");
 
                 menuAction.add(imageInitiale);
