@@ -203,18 +203,14 @@ public class VueImageModifie extends JFrame implements ActionListener,
                                         img.getY2() + FACTEUR_ZOOM);
                         addMemento();
                 } else if (e.getSource() == sauvegarder) {
-                    System.out.println("ok");
-                    JFileChooser fc = new JFileChooser("Enregistrer sous");
+                    JFileChooser fc = new JFileChooser();
+                    fc.setDialogTitle("Enregistrer Sous");
+                    fc.setApproveButtonText("Enregistrer");
                     fc.showOpenDialog(this);
                     if (fc.getSelectedFile() == null)
                             return;
                     
-                    System.out.println();
-                   Controleur.getInstance().sauvegarder(fc.getSelectedFile().getAbsolutePath());
-                   /* Controleur.getInstance().faireZoom(img.getX1() - FACTEUR_ZOOM,
-                                    img.getX2() + FACTEUR_ZOOM, img.getY1() - FACTEUR_ZOOM,
-                                    img.getY2() + FACTEUR_ZOOM);
-                    addMemento();*/
+                    Controleur.getInstance().sauvegarder(fc.getSelectedFile().getAbsolutePath());
                 }
         }
 

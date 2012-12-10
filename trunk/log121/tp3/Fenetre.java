@@ -127,6 +127,7 @@ public class Fenetre extends JFrame implements ActionListener {
 	 */
 	public void restaurer() {
 		JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new FiltreRestaurer());
 		fc.showOpenDialog(this);
 		if (fc.getSelectedFile() == null)
 			return;
